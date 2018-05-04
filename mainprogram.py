@@ -28,7 +28,7 @@ def processpeedtest():
     pinglist.append(ping)
     fullresults = "Results: " + " Download: " + download + " Upload: " + upload + " Ping: " + ping + "."
     print(fullresults)
-    file.write("Test number:"  + str(speedtestindex) + fullresults + " Captured at " + str(time.ctime()) + "." + "\n")
+    file.write("Test number: "  + str(speedtestindex) + fullresults + " Captured at " + str(time.ctime()) + "." + "\n")
 
 
 times = int(input("Hur länge vill du köra programmet? (I sekunder) 12 timmar = 43 200 sekunder: "))
