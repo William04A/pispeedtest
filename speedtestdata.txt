@@ -1,1 +1,0 @@
-Test number:0Results:  Download: 61715371.73996786kbit/s Upload: 91740550.89461458kbit/s Ping: 4.937ms. Captured at Thu May  3 17:55:18 2018.
