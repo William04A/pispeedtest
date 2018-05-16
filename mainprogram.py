@@ -7,7 +7,7 @@ downloadlist = []
 uploadlist = []
 pinglist = []
 filename = "speedtestdata_date:" + str(datetime.datetime.now().day) + ".txt"
-file = open("speedtestdata.txt", "w")
+
 smallestkbitsup = 1000
 largestkbitsup = 0
 smallestkbitsdown = 1000
@@ -26,9 +26,10 @@ def processpeedtest():
     downloadlist.append(download)
     uploadlist.append(upload)
     pinglist.append(ping)
-    fullresults = "Results: " + " Download: " + download + " Upload: " + upload + " Ping: " + ping + "."
+    fullresults = " Results: " + " Download: " + download + " Upload: " + upload + " Ping: " + ping + "."
     print(fullresults)
-    file.write("Test number: "  + str(speedtestindex) + fullresults + " Captured at " + str(time.ctime()) + "." + "\n")
+    with open("speedtestdata.txt", "a+") as file:
+        file.write(fullresults + "\n")
 
 
 times = int(input("Hur länge vill du köra programmet? (I sekunder) 12 timmar = 43 200 sekunder: "))
@@ -40,4 +41,3 @@ for speedtestindex in range(repeat):
     processpeedtest()
     print("Test utfört.")
     time.sleep(interval-12)
-file.close()
