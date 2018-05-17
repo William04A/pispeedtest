@@ -20,8 +20,8 @@ def processpeedtest():
     s.upload()
     results = s.results.dict()
     resultlist = list(results.values())
-    download = str(resultlist[0]) + "kbit/s"
-    upload = str(resultlist[1]) + "kbit/s"
+    download = str(round(resultlist[0]/1000000)) + " mbit/s"
+    upload = str(round(resultlist[1]/1000000)) + " mbit/s"
     ping = str(resultlist[2]) + "ms"
     downloadlist.append(download)
     uploadlist.append(upload)
