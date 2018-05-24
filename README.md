@@ -16,6 +16,8 @@ pip install speedtest-cli
  - Fixed file formatting.
  - Result is now rounded and saved in megabit/s.
 - First "industrial" tests
+
+
 **V0.1**
 - Initial code submitted.
 
