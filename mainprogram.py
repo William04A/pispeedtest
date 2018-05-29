@@ -20,7 +20,7 @@ approved_languages = ["sv-se", "en-us"]
 with open("languageconfiguration.txt", "r+") as languagecofigurationfile:
     languageconfig = languagecofigurationfile.read().splitlines()
 if languageconfig[1] not in approved_languages:
-    print("The current language configuration is not valid. Please check the file languageonfiguration.txt. Valid languages are:")
+    print("The current language configuration is not valid. Please check the file languageconfiguration.txt. Valid languages are:")
     for i in range(len(approved_languages)):
         print(approved_languages[i])
     languageconfiguration = "sv-se"
