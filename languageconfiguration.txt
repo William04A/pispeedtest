@@ -1,1 +1,2 @@
+This is the language configuration file for PiSpeedtest.
 en-us
