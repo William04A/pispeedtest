@@ -25,7 +25,7 @@ pip install speedtest-cli
  - Windows users can now get alerts (message boxes) on their screen. This feature is available in all modes except the "Compatible" mode.
 **V1.0**
 - Several improvements, including:
- - File saving works properly
+ - File saving works properly.
  - Fixed file formatting.
  - Result is now rounded and saved in megabit/s.
 - First "industrial" tests
@@ -35,9 +35,18 @@ pip install speedtest-cli
 - Initial code submitted.
 
 ### How to set up:
-##### HEADS-UP:
-**As with most software, 100% accurate results cannot be guaranteed. The program is powered by the speedtest-cli Python API.**
-##### Beta functions might not work properly. When you need as accurate results as possible, run the mode "STABLE" or "COMPATIBLE".
-
+#### HEADS UP:
+##### As with most software, 100% accurate results cannot be guaranteed. The program is powered by the speedtest-cli Python API.
+**Beta functions might not work properly. When you need as accurate results as possible, run the mode "STABLE" or "COMPATIBLE".**
+___________________________________________
 **Perhaps you´ve just read a tutorial and you found out that the version was different compared to the one showed there. Don´t be scared, here is how you start a speedtest:**
 
+- Run the mainprogram.py file.
+- Wait for a initial speedtest to be completed.
+- Choose a mode. For industrial usage, "STABLE" or "COMPATIBLE" is the best mode as it ensures that everything works to 100%. However, - "BETA" mode gives you the newest features that most likely will work.
+- Choose for how long you want to run the program and then press enter.
+- The next option currently depends on what mode you have chosen. Type in your choise and then press enter.
+- Choose a file name. Make sure to include ".txt" in the end and don´t type in the name of a file that you already have used for speedtesting or other purposes before.
+- Now, wait for the speedtests to be run and then check the file with speedtestdata.
+**If you want to run older versions of the program that you´ve might seen in tutorials, check the "oldreleases" folder.**
+**Want to cancel the program? Ctrl+Z or Ctrl+C will work in most cases.**
