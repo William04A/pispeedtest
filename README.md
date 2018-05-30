@@ -12,7 +12,8 @@ pip install speedtest-cli
 
 - An easier way to translate all texts will be implemented.
 - The "run the program every ___ seconds" will most likely be in the Stable mode.
-- More imporvements ad fixes.
+- More improvements and fixes.
+
 **V1.8**
 - Release 2.0 is upcoming. This is what´s new in release V1.8:
 - More customization:
