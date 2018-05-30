@@ -24,6 +24,7 @@ pip install speedtest-cli
  - Edit the file "languageconfiguration.txt" to select a language. **This means that PiSpeedtest now supports both English and Swedish.**
  - To ensure internet connectivity and to make the "Run the speedtest every __ seconds" more accurate, a speedtest is now being run in the beginning of the program. This feature applies to the "BETA MODE".
  - Windows users can now get alerts (message boxes) on their screen. This feature is available in all modes except the "Compatible" mode.
+ 
 **V1.0**
 - Several improvements, including:
  - File saving works properly.
