@@ -1,4 +1,5 @@
 # π-speedtest
+### This branch (the "beta" branch) includes PiSpeedtest versions that is in BETA. All publicly stable released versions are found on the "master" branch.
 ##### Coming from a tutorial? The program has been changed in some ways, see "How to set up" for more information.
 A code for easy measuring of internet speeds using Speedtest.net and Python. The module/package used is "speedtest-cli" which can be easy retrived doing:
 ` ` `
@@ -8,11 +9,15 @@ pip install speedtest-cli
 
 ### Release notes
 **See the code history for more information.**
-##### Upcoming in version 2.0:
+**V2.0 (in beta):**
+- Lots of improvements, including:
 
-- An easier way to translate all texts will be implemented.
-- The "run the program every ___ seconds" will most likely be in the Stable mode.
-- More improvements and fixes.
+ - It is now super easy to translate the program as all the code for languages is variable-based.
+ - Speedtest-results does now save in the directory "speedtestresults" and .txt as well as file path is added to the file automatically.
+ - The program now checks for updates for PiSpeedtest from a server online.
+ - You can now choose to enter the duration of the program in minutes or seconds.
+ - Most of the beta features are in the stable release.
+ - **V2.0 is in BETA. More things will most likely be added before a stable release.**
 
 **V1.8**
 - Release 2.0 is upcoming. This is what´s new in release V1.8:
