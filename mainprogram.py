@@ -5,6 +5,14 @@ import time
 
 import requests
 import os
+#Defining errors - those will be implemented in the future (probably in version 2.1 or later).
+
+class PiSpeedtestErrors(Exception):
+    pass
+class NoModeDefinded(PiSpeedtestErrors):
+    pass
+class FileError(PiSpeedtestErrors):
+    pass
 downloadlist = []
 uploadlist = []
 pinglist = []
@@ -15,11 +23,18 @@ smallestkbitsdown = 1000
 largestkbitsdown = 0
 noconnection = 0
 fileversionnumber = "1.8"
+allowedmodes = ["BETA MODE", "STABLE", "COMPATIBLE"]
+loadconfig = [0, 0, 0, 0, 0]
 print("PiSpeedtest " + fileversionnumber + ".")
 #Language settings:
 approved_languages = ["sv-se", "en-us"] #To add a language that´s not in the list, make sure to add its name here.
-with open("languageconfiguration.txt", "r+") as languagecofigurationfile:
-    languageconfig = languagecofigurationfile.read().splitlines()
+languageconfigpath = os.path.join(os.getcwd() + "/configurationfiles/languageconfiguration.txt")
+try:
+    with open(languageconfigpath, "r+") as languagecofigurationfile:
+        languageconfig = languagecofigurationfile.read().splitlines()
+except:
+    print("Could not find language configuration. Please make sure that \"languageconfiguration.txt\" is in the directory /configurationfiles.")
+    languageconfig = ["Configuration not found." + "ConfigurationNotFound"]
 if languageconfig[1] not in approved_languages:
     print("The current language configuration is not valid. Please check the file languageonfiguration.txt. Valid languages are:")
     for i in range(len(approved_languages)):
@@ -62,6 +77,17 @@ if languageconfiguration == "sv-se":
     newversionmessage3 = " installerad."
     lookingforupdateserror = "Ett fel inträffade när PiSpeedtest sökte efter nya uppdateringar."
 
+    skipdetected = "SKIP DETEKTERAT"
+    speedtestconfignotfound = "Kunde inte hitta konfigurationsfilen."
+    loadingconfigurationmessage = "Laddar konfiguration..."
+    configurationfilealert = "VARNING: KONFIGURATIONSFILER ÄR I BETA. LÄGES-VAL ÄR INTE INTEGRERAT I PiSpeedtest ÄN!"
+    configuredmodemessage = "Det konfiguerade läget är: "
+    minutes = " minuter."
+    configuredspeedtestdurationmessage = "Konfiguerad speedtest-tid: "
+    invalidmode = "Konfigurationsfilen innehåller ett felaktigt läge."
+    invalidduration = "Konfigurationsfilen innehåller en ogiltig spedtest-tid."
+    configuredruneverysecondmessage = "Konfiguerad \"kör var ___ sekund\": "
+    runeverysecondinvalid = "\"Kör var ___ sekund\"-konfigurationen är felaktig."
 elif languageconfiguration == "en-us":
     pretestresults = "Pre-test-result: Ping to https://www.google.com. Result: "
     pretestresults2 = " seconds."
@@ -92,6 +118,18 @@ elif languageconfiguration == "en-us":
     newversionmessage2 = " of PiSpeedtest is available. You have version: "
     newversionmessage3 = " installed."
     lookingforupdateserror = "An error occured while looking for updates."
+    skipdetected = "SKIP DETECTED"
+    speedtestconfignotfound = "Could not find the configuration file."
+    loadingconfigurationmessage = "Loading configuration..."
+    languageconfigurationnotfound = "Could not find the language configuration file."
+    configurationfilealert = "ALERT: CONFIGURATION FILES ARE IN BETA. MODE SELECTION IS NOT INTEGRATED INTO THE APPLICATION YET!"
+    configuredmodemessage = "The configured mode is: "
+    minutes = " minutes."
+    configuredspeedtestdurationmessage = "Configured speedtest duration: "
+    invalidmode = "The speedtest file contains an invalid mode."
+    invalidduration = "The speedtest file contains an invalid speedtest duration."
+    configuredruneverysecondmessage = "Configured \"run every ___ seconds\": "
+    runeverysecondinvalid = "The \"run every ___ seconds\" configuration is invalid."
 else:
     pretestresults = "The current language configuration is somehow invalid."
     pretestresults2 = "The current language configuration is somehow invalid."
@@ -123,6 +161,18 @@ else:
     newversionmessage3 = "The current language configuration is somehow invalid."
 
     lookingforupdateserror = "The current language configuration is somehow invalid."
+    skipdetected = "The current language configuration is somehow invalid."
+    speedtestconfignotfound = "The current language configuration is somehow invalid."
+    loadingconfigurationmessage = "The current language configuration is somehow invalid."
+    configurationfilealert = "The current language configuration is somehow invalid."
+    configuredmodemessage = "The current language configuration is somehow invalid."
+
+    minutes = "The current language configuration is somehow invalid."
+    configuredspeedtestdurationmessage = "The current language configuration is somehow invalid."
+    invalidmode = "The current language configuration is somehow invalid."
+    invalidduration = "The current language configuration is somehow invalid."
+    configuredruneverysecondmessage = "The current language configuration is somehow invalid."
+    runeverysecondinvalid = "The current language configuration is somehow invalid."
 #Main speedtest code:
 def processpeedtest(backupmode, filename):
     s = speedtest.Speedtest()
@@ -173,9 +223,10 @@ except:
 
 print("\n")
 print(initialspeedtestinformation)
+initialspeedtestsfile = os.path.join(os.getcwd() + "/configurationfiles/" + "intialspeedtests.txt")
 timeone = time.time()
 if noconnection == 0:
-    processpeedtest(0, filename="initialspeedtests.txt")
+    processpeedtest(0, filename = initialspeedtestsfile)
 elif noconnection == 1:
     print(nointernetconnectionmessage)
 speedtesttime = round(time.time() - timeone)
@@ -188,16 +239,71 @@ print(compatiblemode)
 mode = input(pleaseselectaspeedtestmodemessage)
 if mode == "BETA MODE":
     import ctypes
-    programdurationmode = input(programdurationmodemessage)
-    if programdurationmode == "MINUTES":
-        times = int(input(programdurationminutes)*60)
-    elif programdurationmode == "SECONDS":
-        times = int(input(programdurationseconds))
-    else:
-        print(programdurationmodeerror)
-        times = int(input(programdurationminutes)*60)
 
-    interval = int(input(howofteninput + str(speedtesttime) + seconds))
+    print("\n")
+    try:
+        configurationfile = os.path.join(os.getcwd() + "/configurationfiles/config.txt")
+
+        with open(configurationfile, "r+") as configurationsfile:
+            print(loadingconfigurationmessage)
+            print(configurationfilealert)
+            configurationfilecontent = configurationsfile.read().splitlines()
+            if configurationfilecontent[9] in allowedmodes:
+                configuredmode = configurationfilecontent[9]
+                print(configuredmodemessage + configuredmode + ".")
+                loadconfig[0] = 1
+            elif configurationfilecontent[9] == "-SKIP-":
+                print(skipdetected)
+                loadconfig[0] = 0
+            else:
+                print(invalidmode)
+
+                loadconfig[0] = 0
+            try:
+                configuredspeedtestduration1 = int(configurationfilecontent[10])
+                configuredspeedtestduration = int(configuredspeedtestduration1*60)
+                print(configuredspeedtestdurationmessage + str(configuredspeedtestduration/60) + minutes)
+                loadconfig[1] = 1
+            except:
+                if configurationfilecontent[10] == "-SKIP-":
+                    print(skipdetected)
+                    loadconfig[1] = 0
+                else:
+                    print(invalidduration)
+                    loadconfig[1] = 0
+            try:
+                configuredruneverysecond = int(configurationfilecontent[11])
+                print(configuredruneverysecondmessage + str(configuredruneverysecond) + seconds)
+                loadconfig[2] = 1
+            except:
+                if configurationfilecontent[11] == "-SKIP-":
+                    print(skipdetected)
+                    loadconfig[2] = 0
+                else:
+                    print(runeverysecondinvalid)
+                    loadconfig[2] = 0
+    except:
+        print(speedtestconfignotfound)
+        loadconfig[0] = 0
+        loadconfig[1] = 0
+        loadconfig[2] = 0
+    print("\n")
+
+    if loadconfig[1] == 0:
+        programdurationmode = input(programdurationmodemessage)
+        if programdurationmode == "MINUTES":
+            times = int(input(programdurationminutes)*60)
+        elif programdurationmode == "SECONDS":
+            times = int(input(programdurationseconds))
+        else:
+            print(programdurationmodeerror)
+            times = int(input(programdurationminutes)*60)
+    else:
+        times = configuredspeedtestduration
+    if loadconfig[2] == 1:
+        interval = configuredruneverysecond
+    else:
+        interval = int(input(howofteninput + str(speedtesttime) + seconds))
     inputfilename = str(input(speedtestfilenameinput))
     filedirectory = os.path.join(os.getcwd() + "/speedtestresults/" + inputfilename + ".txt")
     with open(filedirectory, "w") as file:
