@@ -23,6 +23,7 @@ pip install speedtest-cli
  - Configuration files are now stored in the direcctory "configurationfiles" and a more customizeable "config.txt" file is available.
  - Improved error handling and messaging, which will be updated even more in the future.
  - Newlines (\n, also known as the thing that happens when you press the "Enter" key on your keyboard), have been added to make the text and messages in PiSpeedtest easier to read.
+ -You can now choose between seconds and minutes while specifying a speedtest duration.
  - More improvements and fixes.
 
 **V1.8**
