@@ -1,0 +1,1 @@
+In this directory, speedtest data are saved and stored.
