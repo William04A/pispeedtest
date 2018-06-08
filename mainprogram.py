@@ -88,6 +88,7 @@ if languageconfiguration == "sv-se":
     invalidduration = "Konfigurationsfilen innehåller en ogiltig spedtest-tid."
     configuredruneverysecondmessage = "Konfiguerad \"kör var ___ sekund\": "
     runeverysecondinvalid = "\"Kör var ___ sekund\"-konfigurationen är felaktig."
+    invalidmodeselected = "Du valde inte ett giltigt program-läge. Vänligen starta om PiSpeedtest."
 elif languageconfiguration == "en-us":
     pretestresults = "Pre-test-result: Ping to https://www.google.com. Result: "
     pretestresults2 = " seconds."
@@ -130,6 +131,7 @@ elif languageconfiguration == "en-us":
     invalidduration = "The speedtest file contains an invalid speedtest duration."
     configuredruneverysecondmessage = "Configured \"run every ___ seconds\": "
     runeverysecondinvalid = "The \"run every ___ seconds\" configuration is invalid."
+    invalidmodeselected = "You didn´t select a valid mode. Please restart PiSpeedtest."
 else:
     pretestresults = "The current language configuration is somehow invalid."
     pretestresults2 = "The current language configuration is somehow invalid."
@@ -173,6 +175,7 @@ else:
     invalidduration = "The current language configuration is somehow invalid."
     configuredruneverysecondmessage = "The current language configuration is somehow invalid."
     runeverysecondinvalid = "The current language configuration is somehow invalid."
+    invalidmodeselected = "The current language configuration is somehow invalid."
 #Main speedtest code:
 def processpeedtest(backupmode, filename):
     s = speedtest.Speedtest()
@@ -223,7 +226,7 @@ except:
 
 print("\n")
 print(initialspeedtestinformation)
-initialspeedtestsfile = os.path.join(os.getcwd() + "/configurationfiles/" + "intialspeedtests.txt")
+initialspeedtestsfile = os.path.join(os.getcwd() + "/speedtestresults/" + "intialspeedtests.txt")
 timeone = time.time()
 if noconnection == 0:
     processpeedtest(0, filename = initialspeedtestsfile)
@@ -399,3 +402,6 @@ elif mode == "COMPATIBLE":
             except:
 
                 print(errormessage)
+
+else:
+    print(invalidmodeselected)
