@@ -1,10 +1,14 @@
 # π-speedtest
+### As of the version PiSpeedtest 2.0, the package "beautifulsoup4" is needed in order to use the "check for updates" feature of PiSpeedtest.
 ##### Coming from a tutorial? The program has been changed in some ways, see "How to set up" for more information.
 A code for easy measuring of internet speeds using Speedtest.net and Python. The module/package used is "speedtest-cli" which can be easy retrived doing:
 ` ` `
 pip install speedtest-cli
  ` ` `
- 
+ For additional stuff (update-checking and more), BeautifulSoup 4 is used. Install it using:
+  ` ` `
+  pip install beautifulsoup4
+   ` ` `
 
 ### Release notes
 **See the code history for more information.**
