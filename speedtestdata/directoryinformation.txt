@@ -1,0 +1,1 @@
+Here, in this directory, speedtest files are saved from the program "PiSpeedtest". 
