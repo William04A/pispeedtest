@@ -1,0 +1,21 @@
+This is a configuration file for the application "PiSpeedtest".
+##CONTENTS LIST:##
+Row 10: Desired mode
+Row 11: Desired speedtest duration (in minutes)
+Row 12: How often you want to run a speedtest. (in seconds)
+DO YOU WANT TO ENTER ANY OPTION MANUALLY EVERY TIME? Just type "-SKIP-" and PiSpeedtest will ask you to
+enter the option when the program starts.
+
+#START OF CONFIGURATION
+BETA MODE
+60
+30
+
+#END OF CONFIGURATION
+Please note that this configuration file and the configuration file function overall is in BETA so far and bugs may occur.
+If you want to view this configuration optimally, open your notes program in a somewhat full-screen mode if you haven´t already.
+
+
+Is the configuration file corrupted? Visit: https://www.pispeedtestfiles.000webhostapp.com/configfiles.html and download a new one.
+
+If this file doesn´t download while opening the link, just copy and paste the content into a new file. Read the first line!
