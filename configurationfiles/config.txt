@@ -16,6 +16,6 @@ Please note that this configuration file and the configuration file function ove
 If you want to view this configuration optimally, open your notes program in a somewhat full-screen mode if you haven´t already.
 
 
-Is the configuration file corrupted? Visit: https://www.pispeedtestfiles.000webhostapp.com/configfiles.html and download a new one.
+Is the configuration file corrupted? Visit: https://pispeedtestfiles.000webhostapp.com/configfiles.html and download a new one.
 
 If this file doesn´t download while opening the link, just copy and paste the content into a new file. Read the first line!
