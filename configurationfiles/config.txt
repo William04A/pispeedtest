@@ -7,9 +7,9 @@ DO YOU WANT TO ENTER ANY OPTION MANUALLY EVERY TIME? Just type "-SKIP-" and PiSp
 enter the option when the program starts.
 
 #START OF CONFIGURATION
-BETA MODE
-60
-30
+-SKIP-
+-SKIP-
+-SKIP-
 
 #END OF CONFIGURATION
 Please note that this configuration file and the configuration file function overall is in BETA so far and bugs may occur.
