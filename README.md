@@ -1,5 +1,4 @@
 # π-speedtest
-### This branch (the "beta" branch) includes PiSpeedtest versions that is in BETA. All publicly stable released versions are found on the "master" branch.
 ##### Coming from a tutorial? The program has been changed in some ways, see "How to set up" for more information.
 A code for easy measuring of internet speeds using Speedtest.net and Python. The module/package used is "speedtest-cli" which can be easy retrived doing:
 ` ` `
