@@ -61,7 +61,7 @@ ___________________________________________
 - Choose a mode. For industrial usage, "STABLE" or "COMPATIBLE" is the best mode as it ensures that everything works to 100%. However, - "BETA" mode gives you the newest features that most likely will work.
 - Choose for how long you want to run the program and then press enter.
 - The next option currently depends on what mode you have chosen. Type in your choise and then press enter.
-- Choose a file name. Make sure to include ".txt" in the end and don´t type in the name of a file that you already have used for speedtesting or other purposes before.
+- Choose a file name. Make sure to not include ".txt" in the end and don´t type in the name of a file that you already have used for speedtesting or other purposes before.
 - Now, wait for the speedtests to be run and then check the file with speedtestdata.
 **If you want to run older versions of the program that you´ve might seen in tutorials, check the "oldreleases" folder.**
 **Want to cancel the program? Ctrl+Z or Ctrl+C will work in most cases.**
