@@ -89,6 +89,7 @@ if languageconfiguration == "sv-se":
     configuredruneverysecondmessage = "Konfiguerad \"kör var ___ sekund\": "
     runeverysecondinvalid = "\"Kör var ___ sekund\"-konfigurationen är felaktig."
     invalidmodeselected = "Du valde inte ett giltigt program-läge. Vänligen starta om PiSpeedtest."
+    waiterror = "Ett fel inträffad när speedtest-tider skulle beräknas. \"Kör programmet var ___ - sekund måste vara större än: "
 elif languageconfiguration == "en-us":
     pretestresults = "Pre-test-result: Ping to https://www.google.com. Result: "
     pretestresults2 = " seconds."
@@ -132,6 +133,7 @@ elif languageconfiguration == "en-us":
     configuredruneverysecondmessage = "Configured \"run every ___ seconds\": "
     runeverysecondinvalid = "The \"run every ___ seconds\" configuration is invalid."
     invalidmodeselected = "You didn´t select a valid mode. Please restart PiSpeedtest."
+    waiterror = "An error occured when calculating speedtest wait times. Make sure that it is bigger than: "
 else:
     pretestresults = "The current language configuration is somehow invalid."
     pretestresults2 = "The current language configuration is somehow invalid."
@@ -176,6 +178,7 @@ else:
     configuredruneverysecondmessage = "The current language configuration is somehow invalid."
     runeverysecondinvalid = "The current language configuration is somehow invalid."
     invalidmodeselected = "The current language configuration is somehow invalid."
+    waiterror = "The current language configuration is somehow invalid."
 #Main speedtest code:
 def processpeedtest(backupmode, filename):
     s = speedtest.Speedtest()
@@ -311,16 +314,23 @@ if mode == "BETA MODE":
     filedirectory = os.path.join(os.getcwd() + "/speedtestresults/" + inputfilename + ".txt")
     with open(filedirectory, "w") as file:
         file.close()
-    repeat = round(times/(interval-speedtesttime))
+
+    wait = interval-speedtesttime
+    if wait < 1:
+        print(waiterror + str(speedtesttime) + seconds)
+
+        exit()
+    else:
+        repeat = round(times/(wait))
     ctypes.windll.user32.MessageBoxW(None, startingspeedtestmessage, "PiSpeedtest", 0)
     steps = int(times)
     if noconnection == 0:
         for speedtestindex in range(repeat):
             try:
                 print(startingspeedtestmessage)
-                processpeedtest(0, filename=inputfilename)
+                processpeedtest(0, filename=filedirectory)
                 print(speedtestcompletedmessage)
-                time.sleep(interval-speedtesttime)
+                time.sleep(wait)
             except:
                 ctypes.windll.user32.MessageBoxW(None, errormessage, "PiSpeedtest", 0)
 
@@ -367,7 +377,7 @@ elif mode == "STABLE":
         for speedtestindex in range(repeat):
             try:
                 print(startingspeedtestmessage)
-                processpeedtest(0, filename=inputfilename)
+                processpeedtest(0, filename=filedirectory)
                 print(speedtestcompletedmessage)
                 time.sleep(interval - speedtesttime)
             except:
@@ -396,7 +406,7 @@ elif mode == "COMPATIBLE":
         for speedtestindex in range(repeat):
             try:
                 print(startingspeedtestmessage)
-                processpeedtest(0, filename=inputfilename)
+                processpeedtest(0, filename=filedirectory)
                 print(speedtestcompletedmessage)
                 time.sleep(interval - speedtesttime)
             except:
