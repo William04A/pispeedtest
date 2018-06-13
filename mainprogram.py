@@ -22,7 +22,7 @@ largestkbitsup = 0
 smallestkbitsdown = 1000
 largestkbitsdown = 0
 noconnection = 0
-fileversionnumber = "2.0"
+fileversionnumber = "2.0.1"
 allowedmodes = ["BETA MODE", "STABLE", "COMPATIBLE"]
 loadconfig = [0, 0, 0, 0, 0]
 print("PiSpeedtest " + fileversionnumber + ".")
