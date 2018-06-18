@@ -1,5 +1,8 @@
 # π-speedtest
-### - A critical file writing error was found! Please update to PiSPeedtest 2.0.1 in order to make sure that you can use PiSpeedtest!
+
+### This branch (the "beta"-branch) contains beta versions of PiSpeedtest that may not be stable. All stable releases are in the "master" branch.
+
+### - A critical file writing error was found! Please update to PiSPeedtest 2.0.1 or higher in order to make sure that you can use PiSpeedtest!
 ### As of the version PiSpeedtest 2.0, the package "beautifulsoup4" is needed in order to use the "check for updates" feature of PiSpeedtest. Some users might also ahve to install the "requests" package if it isn´t installed.
 ##### Coming from a tutorial? The program has been changed in some ways, see "How to set up" for more information.
 A code for easy measuring of internet speeds using Speedtest.net and Python. The module/package used is "speedtest-cli" which can be easy retrived doing:
@@ -13,6 +16,12 @@ pip install speedtest-cli
 
 ### Release notes
 **See the code history for more information.**
+**V2.3 (in beta):**
+- Two new options: different initial speedtest measuring and different speedtest results text formatting.
+- Better error handling.
+- The "check for updates" - function now finds and tells you about beta versions.
+- More improvements, additions and fixes.
+
 **V2.0.1**
 - Fixed a critical file naming bug: an update is required to make PiSpeedtest work properly.
 **V2.0:**
