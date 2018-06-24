@@ -16,7 +16,7 @@ pip install speedtest-cli
 
 ### Release notes
 **See the code history for more information.**
-**V2.3 (in beta):**
+**V2.5 (previously 2.3, but changed to 2.5 because of more changes than planned. In beta.):**
 - Two new options: different initial speedtest measuring and different speedtest results text formatting.
 - Better error handling.
 - The "check for updates" - function now finds and tells you about beta versions.
