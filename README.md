@@ -4,6 +4,9 @@
 
 ### - A critical file writing error was found! Please update to PiSPeedtest 2.0.1 or higher in order to make sure that you can use PiSpeedtest!
 ### As of the version PiSpeedtest 2.0, the package "beautifulsoup4" is needed in order to use the "check for updates" feature of PiSpeedtest. Some users might also ahve to install the "requests" package if it isn´t installed.
+
+### The image generation (in beta) added in PiSpeedtest 2.5 also requires the Python package "Pillow" to be installed.
+
 ##### Coming from a tutorial? The program has been changed in some ways, see "How to set up" for more information.
 A code for easy measuring of internet speeds using Speedtest.net and Python. The module/package used is "speedtest-cli" which can be easy retrived doing:
 ` ` `
