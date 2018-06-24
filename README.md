@@ -13,13 +13,20 @@ pip install speedtest-cli
   ` ` `
   pip install beautifulsoup4
    ` ` `
-
+  For PiSpeedtest result image generation, the library "Pillow" is used. "Pillow" can be installed with pip:
+  ` ` `
+  pip install Pillow
+   ` ` `
 ### Release notes
 **See the code history for more information.**
 **V2.5 (previously 2.3, but changed to 2.5 because of more changes than planned. In beta.):**
-- Two new options: different initial speedtest measuring and different speedtest results text formatting.
+
+- Two new options: different initial speedtest measuring and different speedtest results text formatting. These options
+makes PiSpeedtest even more customzieable and easy to use.
 - Better error handling.
-- The "check for updates" - function now finds and tells you about beta versions.
+- The "check for updates" - function now finds and tells you about beta versions. It also displays release notes for future versions if those are found.
+- A new feature which most likely will be fully integraded to PiSpeedtest 3.0 is image generation. Now, PiSpeedtest can generate a custom image which is saved in PiSpeedtest\Images\Speedtestresultimages. The images shows an approximate max speed, minimum speed and ping times  for each speedtest. This feature is currently in beta and will be updated in the future. **For custom image generation, please install the library "Pillow" using "pip install Pillow".**
+- Configuration files are now integrated into the main application.
 - More improvements, additions and fixes.
 
 **V2.0.1**
