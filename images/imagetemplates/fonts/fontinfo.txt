@@ -1,4 +1,4 @@
-Font from Google Fonts (Roboto Bold). The font was downloaded on: 2018-06-21.
+Font from Google Fonts (Roboto Bold). The font was downloaded and added to PiSpeedtest on: 2018-06-21.
 
 Do you want a custom font for the numbers on the image? Add a .ttf file to the folder "pispeedtest\images\imagetemplates\fonts"
 and then change the variable "fontfilename" in pispeedtest to the font you want filename.
