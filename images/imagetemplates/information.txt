@@ -1,0 +1,8 @@
+The templates in this folder are here in order to make the PiSpeedtest result image generator work properly. As of version 2.5, the program does not support
+the ability to detect the router performance and choosing an image color accordingly to those values.
+Please note that all numbers on generated images are rounded, including ping times. Ping is measured in milliseconds and Upload and Download speeds are measured
+in megabit per second (mbit/s).
+All generated images are generated for you to freely use for projects, including commercial ones.
+Images can be used in for test articles, webshops, when talking to your ISP (Internet Service Provider) and more.
+
+Don´t worry about giving credit.
