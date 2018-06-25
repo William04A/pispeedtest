@@ -1,6 +1,12 @@
 # π-speedtest
-### - A critical file writing error was found! Please update to PiSPeedtest 2.0.1 in order to make sure that you can use PiSpeedtest!
+
+### This branch (the "beta"-branch) contains beta versions of PiSpeedtest that may not be stable. All stable releases are in the "master" branch.
+
+### - A critical file writing error was found! Please update to PiSPeedtest 2.0.1 or higher in order to make sure that you can use PiSpeedtest!
 ### As of the version PiSpeedtest 2.0, the package "beautifulsoup4" is needed in order to use the "check for updates" feature of PiSpeedtest. Some users might also ahve to install the "requests" package if it isn´t installed.
+
+### The image generation (in beta) added in PiSpeedtest 2.5 also requires the Python package "Pillow" to be installed.
+
 ##### Coming from a tutorial? The program has been changed in some ways, see "How to set up" for more information.
 A code for easy measuring of internet speeds using Speedtest.net and Python. The module/package used is "speedtest-cli" which can be easy retrived doing:
 ` ` `
@@ -10,9 +16,22 @@ pip install speedtest-cli
   ` ` `
   pip install beautifulsoup4
    ` ` `
-
+  For PiSpeedtest result image generation, the library "Pillow" is used. "Pillow" can be installed with pip:
+  ` ` `
+  pip install Pillow
+   ` ` `
 ### Release notes
 **See the code history for more information.**
+**V2.5 (previously 2.3, but changed to 2.5 because of more changes than planned. In beta.):**
+
+- Two new options: different initial speedtest measuring and different speedtest results text formatting. These options
+makes PiSpeedtest even more customzieable and easy to use.
+- Better error handling.
+- The "check for updates" - function now finds and tells you about beta versions. It also displays release notes for future versions if those are found.
+- A new feature which most likely will be fully integraded to PiSpeedtest 3.0 is image generation. Now, PiSpeedtest can generate a custom image which is saved in PiSpeedtest\Images\Speedtestresultimages. The images shows an approximate max speed, minimum speed and ping times  for each speedtest. This feature is currently in beta and will be updated in the future. **For custom image generation, please install the library "Pillow" using "pip install Pillow".**
+- Configuration files are now integrated into the main application.
+- More improvements, additions and fixes.
+
 **V2.0.1**
 - Fixed a critical file naming bug: an update is required to make PiSpeedtest work properly.
 **V2.0:**
