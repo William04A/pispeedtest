@@ -20,6 +20,12 @@ pip install speedtest-cli
    ` ` `
 ### Release notes
 **See the code history for more information.**
+**Upcoming in V3.0: (these are planned features and/or features under development as of 10th July 2018)**
+
+- Input fields accepts both lowercase and uppercase characters.
+- Free and automatic cloud backup for all PiSpeedtest result files.
+
+- The algorithm for image generation will be implemented.
 **V2.5 (previously 2.3, but changed to 2.5 because of more changes than planned. In beta.):**
 
 - Two new options: different initial speedtest measuring and different speedtest results text formatting. These options
