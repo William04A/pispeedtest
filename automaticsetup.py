@@ -5,7 +5,7 @@ import subprocess
 print("PiSpeedtest Automatic Setup 1.0 (released with PiSpeedtest 2.0)")
 
 
-with open("languageconfiguration.txt") as languageconfigurationsfile:
+with open(os.path.join(os.getcwd() + "\\configurationfiles\\" + "languageconfiguration.txt"), "r+") as languageconfigurationsfile:
     languageconfigurationsfilecontent = languageconfigurationsfile.read().splitlines()
     languageconfiguration = languageconfigurationsfilecontent[1]
 
