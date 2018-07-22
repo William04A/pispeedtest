@@ -20,13 +20,20 @@ pip install speedtest-cli
    ` ` `
 ### Release notes
 **See the code history for more information.**
-**Upcoming in V3.0: (these are planned features and/or features under development as of 10th July 2018)**
+**V3.0:**
 
+This release is a major PiSpeedtest update, which includes new features like:
 - Input fields accepts both lowercase and uppercase characters.
-- Free and automatic cloud backup for all PiSpeedtest result files.
-
-- The algorithm for image generation will be implemented.
-**V2.5 (previously 2.3, but changed to 2.5 because of more changes than planned. In beta.):**
+- Free, unlimited and automatic cloud backup for all PiSpeedtest result files. You can enable cloud saving
+by running the file "cloudsavingsetup.py". **The cloud saving application is written in Python using Flask as
+the web framework. It is stored on PythonAnywhere. The source code is not being shared yet for different reasons,
+including some security concerns (what if somebody cloned the whole server code and used it for hacking?**
+- An algorithm for image generation has now been implemented. Before your speedtests are being run, you get
+some questions about your current connection. That data is then used to change the background of the speedtest
+images depending on how bad or good your connection is.
+- Bug fixes and improvements.
+- And much more!
+**V2.5 (previously 2.3, but changed to 2.5 because of more changes than planned.):**
 
 - Two new options: different initial speedtest measuring and different speedtest results text formatting. These options
 makes PiSpeedtest even more customzieable and easy to use.
