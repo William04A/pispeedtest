@@ -1,0 +1,2 @@
+Here, you can find quick overviews (speedtest reports) about each speedtest that you have made. Full results are available in the directory
+"speedtestresults".
