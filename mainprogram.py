@@ -442,7 +442,7 @@ try:
         print(cloudsavingnotconfigured)
         confirm = input(configurecloudsavingmessage)
         if confirm == "ENABLE":
-            import cloudsavesetup
+            import cloudsavingsetup
             cloudsavesetup.setup()
         else:
 
