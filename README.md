@@ -20,7 +20,10 @@ pip install speedtest-cli
    ` ` `
 ### Release notes
 **See the code history for more information.**
+
+
 **V3.0:**
+
 
 This release is a major PiSpeedtest update, which includes new features like:
 - Input fields accepts both lowercase and uppercase characters.
@@ -33,6 +36,7 @@ some questions about your current connection. That data is then used to change t
 images depending on how bad or good your connection is.
 - Bug fixes and improvements.
 - And much more!
+
 **V2.5 (previously 2.3, but changed to 2.5 because of more changes than planned.):**
 
 - Two new options: different initial speedtest measuring and different speedtest results text formatting. These options
@@ -45,6 +49,7 @@ makes PiSpeedtest even more customzieable and easy to use.
 
 **V2.0.1**
 - Fixed a critical file naming bug: an update is required to make PiSpeedtest work properly.
+
 **V2.0:**
 - Lots of improvements, including:
 
