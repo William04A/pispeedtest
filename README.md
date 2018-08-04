@@ -22,6 +22,8 @@ pip install speedtest-cli
 **See the code history for more information.**
 
 
+**(Cloudserver update): V1.1:**
+- Fixed a bug that used the upload results for both ping and uplod values while sending backups to the server. Unfortunately, this applied to all uploaded backups and all data uploaded to the cloud before 4th August 2018 is affected.
 **V3.0:**
 
 
