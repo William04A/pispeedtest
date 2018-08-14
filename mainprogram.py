@@ -37,7 +37,7 @@ try:
     smallestkbitsdown = 1000
     largestkbitsdown = 0
     noconnection = 0
-    fileversionnumber = "3.0"
+    fileversionnumber = "3.5"
     allowedmodes = ["BETA MODE", "STABLE", "COMPATIBLE"]
     loadconfig = [0, 0, 0, 0, 0]
 
