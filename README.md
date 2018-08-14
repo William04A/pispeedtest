@@ -38,9 +38,14 @@ Make sure to check out the in-progress Wiki! Just tap the "Wiki" tab above this 
 
 
 #### Application updates:
+**V3.5:**
+
+This update is focusing on PiSpeedtest setup programs, which needen an update.
+- The automaticsetup.py now works with most platforms and not only Windows as the pip module is used. The program is alrady configured to work with pip 10.0 and higher because of the pip.main() module changes with pip 10.
+- The cloudsaving setup now has options to turn off or on cloudsaving, batch-upload data to the cloud and to show your API-key.
+Big application updates are also in progress!
+
 **V3.0:**
-
-
 This release is a major PiSpeedtest update, which includes new features like:
 - Input fields accepts both lowercase and uppercase characters.
 - Free, unlimited and automatic cloud backup for all PiSpeedtest result files. You can enable cloud saving
