@@ -2,13 +2,22 @@
 
 **Messages:**
 
+-----
 ### - A critical file writing error was found! Please update to PiSPeedtest 2.0.1 or higher in order to make sure that you can use PiSpeedtest!
 ### As of the version PiSpeedtest 2.0, the package "beautifulsoup4" is needed in order to use the "check for updates" feature of PiSpeedtest. Some users might also ahve to install the "requests" package if it isn´t installed.
 
 ### The image generation added in PiSpeedtest 2.5 also requires the Python package "Pillow" to be installed.
+-----
 
 ##### Coming from a tutorial? The program has been changed in some ways, see "How to set up" for more information.
-A code for easy measuring of internet speeds using Speedtest.net and Python. The module/package used is "speedtest-cli" which can be easy retrived doing:
+
+
+### What is PiSpeedtest?
+PiSpeedtest is a code for easy measuring of internet speeds using Speedtest.net and Python. 
+
+### Manual installation:
+**Note: this method is not necessary as you can download/git clone this repository and run the file "automaticsetup.py".**
+The module/package used is "speedtest-cli" which can be easy retrived doing:
 ` ` `
 pip install speedtest-cli
  ` ` `
@@ -27,9 +36,8 @@ pip install speedtest-cli
 
 Make sure to check out the in-progress Wiki! Just tap the "Wiki" tab above this text and all the contents of PiSpeedtest! The Wiki contains a good "Quickstart" guide (when I´m writing this) and will be updated with even more things in the future.
 
-**(Cloudserver update): V1.1:**
-- Fixed a bug that used the upload results for both ping and uplod values while sending backups to the server. Unfortunately, this applied to all uploaded backups and all data uploaded to the cloud before 4th August 2018 is affected.
 
+#### Application updates:
 **V3.0:**
 
 
@@ -94,6 +102,10 @@ makes PiSpeedtest even more customzieable and easy to use.
 
 **V0.1**
 - Initial code submitted.
+
+**Cloudserver updates:**
+**V1.1:**
+- Fixed a bug that used the upload results for both ping and uplod values while sending backups to the server. Unfortunately, this applied to all uploaded backups and all data uploaded to the cloud before 4th August 2018 is affected.
 
 ### How to set up:
 #### HEADS UP:
