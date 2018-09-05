@@ -116,6 +116,7 @@ makes PiSpeedtest even more customzieable and easy to use.
 #### HEADS UP:
 ##### As with most software, 100% accurate results cannot be guaranteed. The program is powered by the speedtest-cli Python API.
 **Beta functions might not work properly. When you need as accurate results as possible, run the mode "STABLE" or "COMPATIBLE".**
+You can find a full tutorial with screenshots and more at https://github.com/William04A/pispeedtest/wiki/Quickstart.
 ___________________________________________
 **Perhaps you´ve just read a tutorial and you found out that the version was different compared to the one showed there. Don´t be scared, here is how you start a speedtest:**
 
