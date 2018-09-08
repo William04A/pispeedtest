@@ -542,7 +542,7 @@ try:
         print(lookingforupdateserror + " (" + str(e) + ").")
     print("\n")
     with open(os.path.join(os.getcwd() + "\\cloudsaving\\savedata\\status.txt"), "r") as cloudsavingstatustextfile:
-        raise NotADirectoryError
+        
         filecontents = cloudsavingstatustextfile.read().splitlines()
     if filecontents[0] == "ENABLED":
         print(cloudsavingenabled)
