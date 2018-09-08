@@ -4,7 +4,7 @@
 
 -----
 ### - A critical file writing error was found! Please update to PiSPeedtest 2.0.1 or higher in order to make sure that you can use PiSpeedtest!
-### As of the version PiSpeedtest 2.0, the package "beautifulsoup4" is needed in order to use the "check for updates" feature of PiSpeedtest. Some users might also ahve to install the "requests" package if it isn´t installed.
+### As of the version PiSpeedtest 2.0, the package "beautifulsoup4" is needed in order to use the "check for updates" feature of PiSpeedtest. Some users might also have to install the "requests" package if it isn´t installed.
 
 ### The image generation added in PiSpeedtest 2.5 also requires the Python package "Pillow" to be installed.
 -----
@@ -38,9 +38,18 @@ Make sure to check out the in-progress Wiki! Just tap the "Wiki" tab above this 
 
 
 #### Application updates:
+**V4.0:**
+PiSpeedtest 4.0 is another major update to PiSpeedtest that includes these new things:
+- PiSpeedtest does now have more options when speedtesting. You can now choose what server to perform speedtests against or select servers automatic, like it has been in PiSpeedtest before. Being able to choose servers improves the accuracy some times.
+- You now get more information when processing speedtests.
+- Better error handling.
+- PiSpeedtest has more graphical popups in some places, which makes PiSpeedtest look nicer overall.
+
+- And much more!
+
 **V3.5:**
 
-This update is focusing on PiSpeedtest setup programs, which needen an update.
+This update is focusing on PiSpeedtest setup programs, which needed an update.
 - The automaticsetup.py now works with most platforms and not only Windows as the pip module is used. The program is alrady configured to work with pip 10.0 and higher because of the pip.main() module changes with pip 10.
 - The cloudsaving setup now has options to turn off or on cloudsaving, batch-upload data to the cloud and to show your API-key.
 Big application updates are also in progress!
