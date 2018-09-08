@@ -6,8 +6,15 @@ try:
 
     import os
 
+    from tkinter import *
+
+    from tkinter.font import Font
+
+
 
     # Defining errors - These are not implemented that much yet.
+
+
     def __main__():
         pass
     class PiSpeedtestErrors(Exception):
@@ -37,7 +44,7 @@ try:
     smallestkbitsdown = 1000
     largestkbitsdown = 0
     noconnection = 0
-    fileversionnumber = "3.5"
+    fileversionnumber = "4.0"
     allowedmodes = ["BETA MODE", "STABLE", "COMPATIBLE"]
     loadconfig = [0, 0, 0, 0, 0]
 
@@ -152,6 +159,33 @@ try:
         foundapikey = "En gilltig API-nyckel för molnlagring hittades."
         pingspeednotputintoconsiderationmessage = " Ping-hastighet är ej med i beräkningen."
         pressenterkeymessage = "Tryck på enter-knappen för att stänga PiSpeedtest."
+
+        testserveroptionsmessage = "Vill du testa mot en speciell server? NO eller YES (NO rekommenderas): "
+        pickserveroptionsmessage = "Vänligen ange ID:t på servern som du vill testa mot:  "
+        exceptionlogfileinformation = " Mer information kan hittas i filen exceptionlog.txt."
+        serverunavailablemessage = "Servern du försöker koppla upp till är inte tillgänglig. Vänligen starta om PiSpeedtest och kör programmet igen."
+
+        besttestservermessage = "Okej. Den bästa servern för speedtests kommer att väljas."
+            
+        validserverid = "Det angivna serverid:t verkar vara gilltigt."
+        invalidtestserverid = "Du har angett ett ogilltigt server-id. En speedtestserver kommer att väljas automatiskt."
+        notwindowsosmessage = "Speedtest-serverlistor stöds endast på Windows-system just nu. Du kan öppna ett terminalförnster och skriva \"speedtest --list\" för en komplett serverlista."
+        connectedtstartingspeedtestmessage = "Uppkopplad. Startar speedtest, vänligen vänta."
+        testserverinformation = "Test utfört mot server: "
+
+        invalidspeedtestserveroptionmessage = "Kunde inte förstå ditt val. En server för speedtests kommer att väljas automatiskt."
+
+        speedtestswillberunmessage = " speedtests kommer att köras."
+        currentvaluemessage = " Nuvarande värde: "
+        gettingserversmessage = "Hämtar servers..."
+        gettingbestservermessage = "Hämtar bästa server för speedtests..."
+        connectedtotestserversmessage = "Uppkopplad mot testserver."
+        speedtestcompletedwindowtitle = "Speedtests färdiga - PiSpeedtest"
+        speedtestcompletedwindowtitle2 = "Alla speedtests har körts!"
+        speedtestcompletedwindowmessage = "PiSpeedtest har kört flera speedtests. De har nu körts färdigt."
+        speedtestcompletedwindowsmalldescription = "Du kan nu stänga detta fönster om du vill."
+        
+        speedtestcompletedwindowclosemessage = "Stäng"
     elif languageconfiguration == "en-us":
         pretestresults = "Pre-test-result: Ping to https://www.google.com. Result: "
         pretestresults2 = " seconds."
@@ -243,15 +277,42 @@ try:
         viewresultslinkmessage = "View your speedtest results here: "
         downloadresultslinkmessage = "Additionally, the speedtest results can be downloaded here: "
 
-
         cloudsavingerror = "An error occured while cloudsaving PiSpeedtest results. "
         invalidapikey = "Your current cloudsaving API key is invalid."
         foundapikeyfile = "The file \"apikey.txt\" was found. Looking for API-key."
 
-        pressenterkeymessage = "Press the enter key to close PiSpeedtest."
-        foundapikey = "A valid cloudsaving API keywas found."
+
+        foundapikey = "A valid cloudsaving API key was found."
         pingspeednotputintoconsiderationmessage = " Ping speed is not put into consideration."
         pressenterkeymessage = "Press the enter key to close PiSpeedtest."
+
+        testserveroptionsmessage = "Do you want to test against a specific server? NO or YES (NO recommended): "
+        pickserveroptionsmessage = "Please enter the ID of the server that you want to connect to: "
+        exceptionlogfileinformation = " Full information can be found in the file exceptionlog.txt."
+        serverunavailablemessage = "The server that you are trying to connect to is not available at the moment. Please restart PiSpeedtest and then run it again."
+        testagainstspecificserverinput = "Do you want to test against a specific server? NO or YES (NO recommended): "
+        besttestservermessage = "Okay. The best server for speedtests will be selected."
+        validserverid = "The server ID entered seems to be valid."
+
+        invalidtestserverid = "You entered an invalid test server ID. A speedtest server will be chosen automatically instead."
+        notwindowsosmessage = "Speedtest server lists are only supported on Windows-systems right now. You can open a terminal window and type \"speedtest --list\" for a full server list."
+        connectedtstartingspeedtestmessage = "Connected. Starting speedtest, please wait."
+        testserverinformation = "Test performed against server: "
+        invalidspeedtestserveroptionmessage = "Could not understand your option. A speedtest server will be chosen automatically."
+        speedtestswillberunmessage = " speedtests will be run."
+        currentvaluemessage = " Current value: "
+        gettingserversmessage = "Getting servers..."
+        gettingbestservermessage = "Getting best server for speedtests..."
+        connectedtotestserversmessage = "You are connected to the test server."
+        speedtestcompletedwindowtitle = "Speedtest completed - PiSpeedtest."
+        speedtestcompletedwindowtitle2 = "All speedtests has been completed!"
+        speedtestcompletedwindowmessage = "PiSpeedtest has been running several speedtests. They have now all been completed."
+        
+        speedtestcompletedwindowsmalldescription = "You can now close this window if you want."
+        
+        speedtestcompletedwindowclosemessage = "Close"
+        
+        
     else:
         pretestresults = "The current language configuration is somehow invalid."
         pretestresults2 = "The current language configuration is somehow invalid."
@@ -341,16 +402,56 @@ try:
         foundapikey = "The current language configuration is somehow invalid."
         pingspeednotputintoconsiderationmessage = "The current language configuration is somehow invalid."
         pressenterkeymessage = "The current language configuration is somehow invalid."
+        testserveroptionsmessage = "The current language configuration is somehow invalid,"
+        pickserveroptionsmessage = "The current language configuration is somehow invalid."
 
+        exceptionlogfileinformation = "The current language configuration is somehow invalid."
+        serverunavailablemessage = "The current language configuration is somehow invalid."
+        testagainstspecificserverinput = "The current language configuration is somehow invalid."
 
+        besttestservermessage = "The current language configuration is somehow invalid."
+        validserveridmessage = "The current language configuration is somehow invaild."
+        invalidtestserverid = "The current language configuration is somehow invalid."
+        notwindowsosmessage = "The current language configuration is somehow invalid."
+        connectingtospeedtestserversmessage = "The current language configuration is somehow invalid."
+        connectedtstartingspeedtestmessage = "The current language configuration is somehow invalid."
+
+        testserverinformation = "The current language configuration is somehow invalid."
+        invalidspeedtestserveroptionmessage = "The current language configuration is somehow invalid."
+        speedtestswillberunmessage = "The current language configuration is somehow invalid."
+
+        currentvaluemessage = "The current language configuration is somehow invalid."
+        gettingserversmessage = "The current language configuration is somehow invalid."
+        gettingbestservermessage = "The currrent language configuration is somehow invalid."
+        
+        connectedtotestserversmessage = "The current language configuration is somehow invalid."
+        
+        
+        
+        speedtestcompletedwindowtitle = "The current language configuration is somehow invalid."
+        speedtestcompletedwindowtitle2 = "The current language configuration is somehow invalid."
+        speedtestcompletedwindowmessage = "The current language configuration is somehow invalid."
+        speedtestcompletedwindowsmalldescription = "The current language configuration is somehow invalid."
+        speedtestcompletedwindowclosemessage = "The current language conifguration is somehow invalid."
     # Main speedtest code:
-    def processpeedtest(backupmode, filename, textlayout):
+    def processpeedtest(backupmode, filename, textlayout, serverid):
+        print("\n")
         s = speedtest.Speedtest()
-        s.get_servers()
+        if serverid == "Auto":
+            servers = []
+        else:
+            servers = [int(serverid)]
+        print(connectingtospeedtestserversmessage)
+        s.get_servers(servers)
         s.get_best_server()
+        print(connectedtstartingspeedtestmessage)
         s.download()
         s.upload()
+
         results = s.results.dict()
+        servername = results.get("server").get("sponsor")
+        serverid = results.get("server").get("id")
+        print(testserverinformation + servername + ", ID:" + serverid +  ".")
         resultlist = list(results.values())
         download = str(round(resultlist[0] / 1000000)) + " mbit/s"
         upload = str(round(resultlist[1] / 1000000)) + " mbit/s"
@@ -377,7 +478,7 @@ try:
             with open("speedtestbackup.txt", "a+") as backupfile:
                 backupfile.write(fullresults + "\n")
 
-
+        print("\n")
     #(end of main speedtest code.)
     def processspeedtest_onlyupload(filename):
         s = speedtest.Speedtest()
@@ -389,7 +490,15 @@ try:
             file.write("Upload: " + str(results) + " (only upload test)")
 
 
+    #Defining the saving function for the file "exceptionlog.txt"
+    def saveexceptioninfo(exceptiontext, codepart):
 
+        exceptiontime = str(time.ctime())
+        exceptiontext = str(exceptiontext)
+
+        with open(os.path.join(os.getcwd() + "\\exceptionlog.txt"), "a+") as exceptionlogfile:
+
+            exceptionlogfile.write("\n" + "[ERROR/EXCEPTION on " + codepart + " at " + exceptiontime + ".]" + " Full exception: " + exceptiontext + ".")
 
     try:
         import requests
@@ -433,6 +542,7 @@ try:
         print(lookingforupdateserror + " (" + str(e) + ").")
     print("\n")
     with open(os.path.join(os.getcwd() + "\\cloudsaving\\savedata\\status.txt"), "r") as cloudsavingstatustextfile:
+        raise NotADirectoryError
         filecontents = cloudsavingstatustextfile.read().splitlines()
     if filecontents[0] == "ENABLED":
         print(cloudsavingenabled)
@@ -443,7 +553,7 @@ try:
         confirm = input(configurecloudsavingmessage)
         if confirm == "ENABLE":
             import cloudsavingsetup
-            cloudsavesetup.setup()
+            cloudsavingsetup.setup()
         else:
 
             print(skipingcloudsavingsetupmessage)
@@ -464,7 +574,7 @@ try:
         timeone = time.time()
         if noconnection == 0:
 
-            processpeedtest(0, filename=initialspeedtestsfile, textlayout="Text")
+            processpeedtest(0, filename=initialspeedtestsfile, textlayout="Text", serverid="Auto")
             speedtesttime = round(time.time() - timeone)
             print(speedtestran + str(speedtesttime) + speedtestseconds)
         elif noconnection == 1:
@@ -476,7 +586,7 @@ try:
         if noconnection == 0:
             for i in range(3):
                 time1 = time.time()
-                processpeedtest(False, "initialspeedtest.txt", textlayout="Text")
+                processpeedtest(False, "initialspeedtest.txt", textlayout="Text", serverid="Auto")
                 timelist.append(str(round(time.time()-time1)))
                 print(speedtestran + str(timelist[i]) + speedtestseconds)
             speedtesttime = round(eval("+".join(timelist)))
@@ -497,7 +607,7 @@ try:
         if noconnection == 0:
             for i in range(5):
                 timenumberone = time.time()
-                processpeedtest(False, "initialspeedtest.txt", textlayout="Text")
+                processpeedtest(False, "initialspeedtest.txt", textlayout="Text", serverid="Auto")
                 timelist2.append(str(round(time.time() - timenumberone, 1)))
                 print(speedtestran + timelist2[i] + speedtestseconds)
             times = "+".join(timelist2)
@@ -603,15 +713,47 @@ try:
         inputmaxdownloadspeed = int(input(maxdownloadspeedinputmessage))
         inputmaxuploadspeed = int(input(maxuploadspeedinputmessage))
         #inputmaxpingspeed = int(input(maxpingspeedinputmessage)) (not used for the connection score algorithm yet.)
-        connectiontype = input("What connection type are you using? WIFI, CABLE or CELLULAR: ")
+        connectiontype = input(connectiontypeinputmessage)
+
+        testserver = input(testserveroptionsmessage)
+
+
+        if testserver.upper() == "NO":
+            print(besttestservermessage)
+            server = "Auto"
+        elif testserver.upper() == "YES":
+            serverid = input(pickserveroptionsmessage)
+            if len(serverid) == 4:
+                print(validserveridmessage)
+                server = int(serverid)
+
+            else:
+
+                print(invalidtestserverid)
+                server = "Auto"
+        elif testserver.upper() == "SERVER LIST":
+            if os.name == "nt":
+                os.startfile("speedtestserverlist.bat")
+            else:
+                print(notwindowsosmessage)
+        else:
+            print(invalidspeedtestserveroptionmessage)
+            server = "Auto"
+
         print("\n")
-        wait = interval - speedtesttime
+
+        wait = interval - int(speedtesttime)
+        repeat = times / wait
+
+
         if wait < 1:
-            print(waiterror + str(speedtesttime) + seconds)
+            print(waiterror + str(speedtesttime) + seconds + currentvaluemessage + str(wait))
 
             exit()
         else:
             repeat = round(times / (wait))
+        print(str(repeat) + speedtestswillberunmessage)
+
         print("\n")
         print(programoptionsmessage)
         print(textoptionmessage)
@@ -631,18 +773,31 @@ try:
 
         print("\n")
         if noconnection == 0:
+            print(connectingtospeedtestserversmessage)
+            speedtestdata = speedtest.Speedtest()
+            print(gettingserversmessage)
+            speedtestdata.get_servers()
+            print(gettingbestservermessage)
+            speedtestdata.get_best_server()
+            speedtestconfig = speedtestdata.config
+            ipadress = speedtestconfig.get("client").get("ip")
+            isp = speedtestconfig.get("client").get("isp")
+            print(connectedtotestserversmessage +  " IP Adress: " + str(ipadress) + "." + " ISP (Internet Service Provider): " + str(isp) + ".")
             for speedtestindex in range(repeat):
                 try:
 
                     print(startingspeedtestmessage)
-                    processpeedtest(0, filename=filedirectory, textlayout=configuredtextlayout)
+                    processpeedtest(0, filename=filedirectory, textlayout=configuredtextlayout, serverid=server)
                     print(speedtestcompletedmessage)
                     time.sleep(0.5)
+                except speedtest.NoMatchedServers:
+                    ctypes.windll.user32.MessageBoxW(None, serverunavailablemessage, "PiSpeedtest", 0)
+
                 except Exception as e:
                     ctypes.windll.user32.MessageBoxW(None, errormessage, "PiSpeedtest", 0)
 
-                    print(errormessage + "(" + str(e) + ").")
-
+                    print(errormessage + "(" + str(e) + ")." + exceptionlogfileinformation)
+                    saveexceptioninfo(e, "Speedtest engine")
                     # This is being added in a later release:
                     # box = ctypes.windll.user32.MessageBoxW(None, "An error occured while running a speedtest. Would you like to try again? Everything will restart. The file with new speedtest data will be namned \"speedtestbackup.txt\".", "PiSpeedtest", 5)
                     # if box == 1:
@@ -761,6 +916,7 @@ try:
                 print(speedtestimagesaved)
             except Exception as e:
                 print(imagegenerationerror + " (" + str(Exception) + ").")
+                saveexceptioninfo(e, "Results image generation")
 
             try:
                 download_data = str(downloadlist)
@@ -804,6 +960,44 @@ try:
             except Exception as e:
                 print(cloudsavingerror + "(" + str(e) + ").")
 
+                saveexceptioninfo(e, "Cloudsaving")
+
+            root = Tk()
+            root.title(speedtestcompletedwindowtitle)
+            font_small = Font(family="Arial", size="8")
+            font_medium = Font(family="Arial", size="10")
+            font_big = Font(family="Arial", size="20")
+            root.geometry("500x250")
+
+
+            def closewindow():
+                root.destroy()
+
+
+            imagefile = PhotoImage(file= os.path.join(os.getcwd() + "\\images\\popup_images\\" + "Speedtestcomplete_image.png"))
+
+            image = Label(root, image=imagefile)
+            image.image = imagefile
+
+            image.pack()
+            title = Label(root, text=speedtestcompletedwindowtitle2)
+            title.configure(font=font_big)
+            title.pack()
+
+            description = Label(root, text=speedtestcompletedwindowmessage)
+            description.configure(font=font_medium)
+            description.pack()
+
+            smalldescription = Label(root, text=speedtestcompletedwindowsmalldescription)
+            smalldescription.configure(font=font_small)
+
+            smalldescription.pack()
+            button = Button(root, text=speedtestcompletedwindowclosemessage, command=closewindow, compound="center")
+            button.pack()
+
+
+            root.mainloop()
+
 
         else:
             print(nointernetconnectionmessage)
@@ -834,15 +1028,46 @@ try:
             file.close()
         inputmaxdownloadspeed = int(input(maxdownloadspeedinputmessage))
         inputmaxuploadspeed = int(input(maxuploadspeedinputmessage))
-        connectiontype = input("What connection type are you using? WIFI, CABLE or CELLULAR: ")
+        # inputmaxpingspeed = int(input(maxpingspeedinputmessage)) (not used for the connection score algorithm yet.)
+        connectiontype = input(connectiontypeinputmessage)
+
+        testserver = input(testserveroptionsmessage)
+
+        if testserver.upper() == "NO":
+            print(besttestservermessage)
+            server = "Auto"
+        elif testserver.upper() == "YES":
+            serverid = input(pickserveroptionsmessage)
+            if len(serverid) == 4:
+                print(validserveridmessage)
+                server = int(serverid)
+
+            else:
+
+                print(invalidtestserverid)
+                server = "Auto"
+        elif testserver.upper() == "SERVER LIST":
+            if os.name == "nt":
+                os.startfile("speedtestserverlist.bat")
+            else:
+                print(notwindowsosmessage)
+        else:
+            print(invalidspeedtestserveroptionmessage)
+            server = "Auto"
+
         print("\n")
-        wait = interval - speedtesttime
+
+        wait = interval - int(speedtesttime)
+        repeat = times / wait
+
         if wait < 1:
-            print(waiterror + str(speedtesttime) + seconds)
+            print(waiterror + str(speedtesttime) + seconds + currentvaluemessage + str(wait))
 
             exit()
         else:
             repeat = round(times / (wait))
+        print(str(repeat) + speedtestswillberunmessage)
+
         print("\n")
         print(programoptionsmessage)
         print(textoptionmessage)
@@ -861,20 +1086,47 @@ try:
 
         print("\n")
         if noconnection == 0:
+            print(connectingtospeedtestserversmessage)
+            speedtestdata = speedtest.Speedtest()
+            print(gettingserversmessage)
+            speedtestdata.get_servers()
+            print(gettingbestservermessage)
+            speedtestdata.get_best_server()
+            speedtestconfig = speedtestdata.config
+            ipadress = speedtestconfig.get("client").get("ip")
+            isp = speedtestconfig.get("client").get("isp")
+            print(connectedtotestserversmessage + " IP Adress: " + str(
+                ipadress) + "." + " ISP (Internet Service Provider): " + str(isp) + ".")
             for speedtestindex in range(repeat):
                 try:
 
                     print(startingspeedtestmessage)
-                    processpeedtest(0, filename=filedirectory, textlayout=configuredtextlayout)
+                    processpeedtest(0, filename=filedirectory, textlayout=configuredtextlayout, serverid=server)
                     print(speedtestcompletedmessage)
                     time.sleep(0.5)
+                except speedtest.NoMatchedServers:
+                    ctypes.windll.user32.MessageBoxW(None, serverunavailablemessage, "PiSpeedtest", 0)
+
                 except Exception as e:
                     ctypes.windll.user32.MessageBoxW(None, errormessage, "PiSpeedtest", 0)
 
-                    print(errormessage + "(" + str(e) + ").")
+                    print(errormessage + "(" + str(e) + ")." + exceptionlogfileinformation)
+                    saveexceptioninfo(e, "Speedtest engine")
+                    # This is being added in a later release:
+                    # box = ctypes.windll.user32.MessageBoxW(None, "An error occured while running a speedtest. Would you like to try again? Everything will restart. The file with new speedtest data will be namned \"speedtestbackup.txt\".", "PiSpeedtest", 5)
+                    # if box == 1:
+                    # print(Running speedtest once more.")
+                    # for speedtestindex in range(repeat):
+
+                    # print("A speedtest is being started.")
+                    # processpeedtest(0, filename="speedtestbackup.txt")
+                    # print("A speedtest has been completed.")
+                    # time.sleep(interval)
+                    # elif box == 2:
+                    # print("Quitting PiSpeedtest because of an error.")
+                    # else:
+                    # print("Quitting PiSpeedtest because of an error.")
             print("\n")
-
-
             try:
                 from PIL import Image, ImageDraw, ImageFont
 
@@ -978,6 +1230,7 @@ try:
                 print(speedtestimagesaved)
             except Exception as e:
                 print(imagegenerationerror + " (" + str(Exception) + ").")
+                saveexceptioninfo(e, "Results image generation")
 
             try:
                 download_data = str(downloadlist)
@@ -996,12 +1249,18 @@ try:
                     pispeedtestuploadresultstocloudrequest = requests.get(upload_url)
                     print(cloudserverreponsemessage + pispeedtestuploadresultstocloudrequest.text + ".")
                     if "A file with the name" in pispeedtestuploadresultstocloudrequest.text:
-                        print(viewresultslinkmessage + "https://pispeedtestcloudsaving.pythonanywhere.com" + pispeedtestuploadresultstocloudrequest.text.replace("A file with the name " + inputfilename + ".txt" + " has been saved in the cloud. Access it with: ","") + ".")
-                        print(downloadresultslinkmessage + "https://pispeedtestcloudsaving.pythonanywhere.com" + pispeedtestuploadresultstocloudrequest.text.replace(
-                                "A file with the name " + inputfilename + ".txt" + " has been saved in the cloud. Access it with: ","").replace("show-", "download-") + ".")
+                        print(
+                            viewresultslinkmessage + "https://pispeedtestcloudsaving.pythonanywhere.com" + pispeedtestuploadresultstocloudrequest.text.replace(
+                                "A file with the name " + inputfilename + ".txt" + " has been saved in the cloud. Access it with: ",
+                                "") + ".")
+                        print(
+                            downloadresultslinkmessage + "https://pispeedtestcloudsaving.pythonanywhere.com" + pispeedtestuploadresultstocloudrequest.text.replace(
+                                "A file with the name " + inputfilename + ".txt" + " has been saved in the cloud. Access it with: ",
+                                "").replace("show-", "download-") + ".")
 
                         print(generatingspeedtestreportmessage)
-                        with open(os.path.join(os.getcwd() + "/speedtestreports/" + inputfilename + "_report" + ".txt"),"w") as speedtestreportfile:
+                        with open(os.path.join(os.getcwd() + "/speedtestreports/" + inputfilename + "_report" + ".txt"),
+                                  "w") as speedtestreportfile:
                             speedtestreportfile.write("SPEEDTEST REPORT by PiSpeedtest." + "\n")
                             speedtestreportfile.write("Generated at " + str(time.ctime()) + "." + "\n")
 
@@ -1015,17 +1274,57 @@ try:
                             speedtestreportfile.write("HIGHEST UPLOAD SPEED: " + str(maxupload) + " mbit/s" + "\n")
                             speedtestreportfile.write("HIGHEST PING SPEED: " + str(maxping) + " milliseconds" + "\n")
                             speedtestreportfile.write("View full results here: " + "https://pispeedtestcloudsaving.pythonanywhere.com" + pispeedtestuploadresultstocloudrequest.text.replace("A file with the name " + inputfilename + ".txt" + " has been saved in the cloud. Access it with: ","") + "." + "\n")
-                            speedtestreportfile.write("Download full results here: " + "https://pispeedtestcloudsaving.pythonanywhere.com" + pispeedtestuploadresultstocloudrequest.text.replace("A file with the name " + inputfilename + ".txt" + " has been saved in the cloud. Access it with: ","").replace("show-", "download-") + "." + "\n")
+                            speedtestreportfile.write("Download full results here: " + "https://pispeedtestcloudsaving.pythonanywhere.com" + pispeedtestuploadresultstocloudrequest.text.replace("A file with the name " + inputfilename + ".txt" + " has been saved in the cloud. Access it with: ", "").replace("show-", "download-") + "." + "\n")
                             speedtestreportfile.write("Powered- and generated by the application \"PiSpeedtest\"." + "\n")
 
                         print(savedspeedtestreportmessage)
             except Exception as e:
                 print(cloudsavingerror + "(" + str(e) + ").")
 
+                saveexceptioninfo(e, "Cloudsaving")
+
+            root = Tk()
+            root.title(speedtestcompletedwindowtitle)
+            font_small = Font(family="Arial", size="8")
+            font_medium = Font(family="Arial", size="10")
+            font_big = Font(family="Arial", size="20")
+            root.geometry("500x250")
+
+
+            def closewindow():
+                root.destroy()
+
+
+            imagefile = PhotoImage(
+                file=os.path.join(os.getcwd() + "\\images\\popup_images\\" + "Speedtestcomplete_image.png"))
+
+            image = Label(root, image=imagefile)
+            image.image = imagefile
+
+            image.pack()
+            title = Label(root, text=speedtestcompletedwindowtitle2)
+            title.configure(font=font_big)
+            title.pack()
+
+            description = Label(root, text=speedtestcompletedwindowmessage)
+            description.configure(font=font_medium)
+            description.pack()
+
+            smalldescription = Label(root, text=speedtestcompletedwindowsmalldescription)
+            smalldescription.configure(font=font_small)
+
+            smalldescription.pack()
+            button = Button(root, text=speedtestcompletedwindowclosemessage, command=closewindow, compound="center")
+            button.pack()
+
+            root.mainloop()
+
 
         else:
             print(nointernetconnectionmessage)
+
     elif mode == "COMPATIBLE" or mode.lower() == "compatible":
+
         print("\n")
 
         if loadconfig[1] == 0:
@@ -1049,15 +1348,46 @@ try:
             file.close()
         inputmaxdownloadspeed = int(input(maxdownloadspeedinputmessage))
         inputmaxuploadspeed = int(input(maxuploadspeedinputmessage))
-        connectiontype = input("What connection type are you using? WIFI, CABLE or CELLULAR: ")
+        # inputmaxpingspeed = int(input(maxpingspeedinputmessage)) (not used for the connection score algorithm yet.)
+        connectiontype = input(connectiontypeinputmessage)
+
+        testserver = input(testserveroptionsmessage)
+
+        if testserver.upper() == "NO":
+            print(besttestservermessage)
+            server = "Auto"
+        elif testserver.upper() == "YES":
+            serverid = input(pickserveroptionsmessage)
+            if len(serverid) == 4:
+                print(validserveridmessage)
+                server = int(serverid)
+
+            else:
+
+                print(invalidtestserverid)
+                server = "Auto"
+        elif testserver.upper() == "SERVER LIST":
+            if os.name == "nt":
+                os.startfile("speedtestserverlist.bat")
+            else:
+                print(notwindowsosmessage)
+        else:
+            print(invalidspeedtestserveroptionmessage)
+            server = "Auto"
+
         print("\n")
-        wait = interval - speedtesttime
+
+        wait = interval - int(speedtesttime)
+        repeat = times / wait
+
         if wait < 1:
-            print(waiterror + str(speedtesttime) + seconds)
+            print(waiterror + str(speedtesttime) + seconds + currentvaluemessage + str(wait))
 
             exit()
         else:
             repeat = round(times / (wait))
+        print(str(repeat) + speedtestswillberunmessage)
+
         print("\n")
         print(programoptionsmessage)
         print(textoptionmessage)
@@ -1070,22 +1400,38 @@ try:
             print(startingspeedtestmessage)
         else:
             print(invalidtextlayout)
+        print(speedteststartpopupmessage)
+        ctypes.windll.user32.MessageBoxW(None, startingspeedtestmessage, "PiSpeedtest", 0)
         steps = int(times)
 
         print("\n")
         if noconnection == 0:
+            print(connectingtospeedtestserversmessage)
+            speedtestdata = speedtest.Speedtest()
+            print(gettingserversmessage)
+            speedtestdata.get_servers()
+            print(gettingbestservermessage)
+            speedtestdata.get_best_server()
+            speedtestconfig = speedtestdata.config
+            ipadress = speedtestconfig.get("client").get("ip")
+            isp = speedtestconfig.get("client").get("isp")
+            print(connectedtotestserversmessage + " IP Adress: " + str(
+                ipadress) + "." + " ISP (Internet Service Provider): " + str(isp) + ".")
             for speedtestindex in range(repeat):
                 try:
 
                     print(startingspeedtestmessage)
-                    processpeedtest(0, filename=filedirectory, textlayout=configuredtextlayout)
+                    processpeedtest(0, filename=filedirectory, textlayout=configuredtextlayout, serverid=server)
                     print(speedtestcompletedmessage)
                     time.sleep(0.5)
+                except speedtest.NoMatchedServers:
+                    print(serverunavailablemessage)
+
                 except Exception as e:
-
-                    print(errormessage + "(" + str(e) + ").")
+                    print(errormessage + "(" + str(e) + ")." + exceptionlogfileinformation)
+                    saveexceptioninfo(e, "Speedtest engine")
+                    
             print("\n")
-
             try:
                 from PIL import Image, ImageDraw, ImageFont
 
@@ -1157,8 +1503,7 @@ try:
 
                         uploadscore = 5
                 mainscore = uploadscore + downloadscore
-                print("ConnectionScore: " + str(
-                    mainscore) + " (max 30, min 10)." + pingspeednotputintoconsiderationmessage)
+                print("ConnectionScore: " + str(mainscore) + " (max 30, min 10)." + pingspeednotputintoconsiderationmessage)
                 if mainscore > 24:
                     filepath = os.path.join(os.getcwd() + "/images/imagetemplates/template_goodscore.png")
                 elif mainscore > 14:
@@ -1189,6 +1534,7 @@ try:
                 print(speedtestimagesaved)
             except Exception as e:
                 print(imagegenerationerror + " (" + str(Exception) + ").")
+                saveexceptioninfo(e, "Results image generation")
 
             try:
                 download_data = str(downloadlist)
@@ -1207,11 +1553,11 @@ try:
                     pispeedtestuploadresultstocloudrequest = requests.get(upload_url)
                     print(cloudserverreponsemessage + pispeedtestuploadresultstocloudrequest.text + ".")
                     if "A file with the name" in pispeedtestuploadresultstocloudrequest.text:
-                        print(viewresultslinkmessage + "https://pispeedtestcloudsaving.pythonanywhere.com" + pispeedtestuploadresultstocloudrequest.text.replace("A file with the name " + inputfilename + ".txt" + " has been saved in the cloud. Access it with: ", "") + ".")
+                        print(viewresultslinkmessage + "https://pispeedtestcloudsaving.pythonanywhere.com" + pispeedtestuploadresultstocloudrequest.text.replace("A file with the name " + inputfilename + ".txt" + " has been saved in the cloud. Access it with: ","") + ".")
                         print(downloadresultslinkmessage + "https://pispeedtestcloudsaving.pythonanywhere.com" + pispeedtestuploadresultstocloudrequest.text.replace("A file with the name " + inputfilename + ".txt" + " has been saved in the cloud. Access it with: ","").replace("show-", "download-") + ".")
 
                         print(generatingspeedtestreportmessage)
-                        with open(os.path.join(os.getcwd() + "/speedtestreports/" + inputfilename + "_report" + ".txt"), "w") as speedtestreportfile:
+                        with open(os.path.join(os.getcwd() + "/speedtestreports/" + inputfilename + "_report" + ".txt"),"w") as speedtestreportfile:
                             speedtestreportfile.write("SPEEDTEST REPORT by PiSpeedtest." + "\n")
                             speedtestreportfile.write("Generated at " + str(time.ctime()) + "." + "\n")
 
@@ -1225,16 +1571,54 @@ try:
                             speedtestreportfile.write("HIGHEST UPLOAD SPEED: " + str(maxupload) + " mbit/s" + "\n")
                             speedtestreportfile.write("HIGHEST PING SPEED: " + str(maxping) + " milliseconds" + "\n")
                             speedtestreportfile.write("View full results here: " + "https://pispeedtestcloudsaving.pythonanywhere.com" + pispeedtestuploadresultstocloudrequest.text.replace("A file with the name " + inputfilename + ".txt" + " has been saved in the cloud. Access it with: ","") + "." + "\n")
-                            speedtestreportfile.write("Download full results here: " + "https://pispeedtestcloudsaving.pythonanywhere.com" + pispeedtestuploadresultstocloudrequest.text.replace("A file with the name " + inputfilename + ".txt" + " has been saved in the cloud. Access it with: ", "").replace("show-", "download-") + "." + "\n")
+                            speedtestreportfile.write("Download full results here: " + "https://pispeedtestcloudsaving.pythonanywhere.com" + pispeedtestuploadresultstocloudrequest.text.replace("A file with the name " + inputfilename + ".txt" + " has been saved in the cloud. Access it with: ","").replace("show-", "download-") + "." + "\n")
                             speedtestreportfile.write("Powered- and generated by the application \"PiSpeedtest\"." + "\n")
 
                         print(savedspeedtestreportmessage)
             except Exception as e:
                 print(cloudsavingerror + "(" + str(e) + ").")
 
+                saveexceptioninfo(e, "Cloudsaving")
+
+            root = Tk()
+            root.title(speedtestcompletedwindowtitle)
+            font_small = Font(family="Arial", size="8")
+            font_medium = Font(family="Arial", size="10")
+            font_big = Font(family="Arial", size="20")
+            root.geometry("500x250")
+
+
+            def closewindow():
+                root.destroy()
+
+
+            imagefile = PhotoImage(file=os.path.join(os.getcwd() + "\\images\\popup_images\\" + "Speedtestcomplete_image.png"))
+
+            image = Label(root, image=imagefile)
+            image.image = imagefile
+
+            image.pack()
+            title = Label(root, text=speedtestcompletedwindowtitle2)
+            title.configure(font=font_big)
+            title.pack()
+
+            description = Label(root, text=speedtestcompletedwindowmessage)
+            description.configure(font=font_medium)
+            description.pack()
+
+            smalldescription = Label(root, text=speedtestcompletedwindowsmalldescription)
+            smalldescription.configure(font=font_small)
+
+            smalldescription.pack()
+            button = Button(root, text=speedtestcompletedwindowclosemessage, command=closewindow, compound="center")
+            button.pack()
+
+            root.mainloop()
+
 
         else:
             print(nointernetconnectionmessage)
+
     else:
         print(invalidmodeselected)
         raise NoModeDefinded("\"" + mode + "\"" + " is not a valid mode.")
@@ -1242,12 +1626,56 @@ try:
 except Exception as e:
 
     print(erroroccurred + " (" + str(e) + ").")
+    saveexceptioninfo(e, "PiSpeedtest")
 
+
+
+    import webbrowser
+
+    import os
+
+    errorwindow = Tk()
+    font_small = Font(family="Arial", size="8")
+    font_medium = Font(family="Arial", size="10")
+    font_mini = Font(family="Arial", size="6")
+    font_big = Font(family="Arial", size="20")
+
+
+    def reportabug():
+        webbrowser.open("https://github.com/William04A/pispeedtest/issues/new")
+
+
+    errorwindow.geometry("500x270")
+    errorwindow.title("PiSpeedtest - An error has occured.")
+
+    imagefile = PhotoImage(file=os.path.join(os.getcwd() + "\\" + "images\\popup_images" + "\\Speedtest_erroricon.png"))
+    image = Label(errorwindow, image=imagefile)
+    image.pack()
+    titletext = Label(errorwindow, text="An error has occured.")
+
+    titletext.configure(font=font_big)
+
+    titletext.pack()
+    description = Label(errorwindow, text="Unfortunately, an error occured in PiSpeedtest. Try to restart the program and see if" + "\n" + "the problem gets resolved. If not, please tap \"report a bug\" below.")
+    description.configure(font=font_medium)
+
+    description.pack()
+    button = Button(errorwindow, text="Report a bug", command=reportabug, compound="center")
+
+    button.pack()
+    smalldescription = Label(errorwindow,text="When submitting a bug report, please make sure to paste this exception: " + "\"" + str(e) + "\"" + "\n This information is in English to make sure that \n it can display at almost all times an error is discovered.")
+    smalldescription.configure(font=font_mini)
+    smalldescription.pack()
+    errorwindow.mainloop()
+    saveexceptioninfo(e, "Main program")
 finally:
 
 
 
 
     print("\n")
-    input(pressenterkeymessage)
+    try:
+        input(pressenterkeymessage)
 
+    except ValueError:
+        exit()
