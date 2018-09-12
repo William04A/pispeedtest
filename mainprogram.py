@@ -186,6 +186,8 @@ try:
         speedtestcompletedwindowsmalldescription = "Du kan nu stänga detta fönster om du vill."
         
         speedtestcompletedwindowclosemessage = "Stäng"
+        connectingtospeedtestserversmessage = "Ansluter till speedtest-server..."
+
     elif languageconfiguration == "en-us":
         pretestresults = "Pre-test-result: Ping to https://www.google.com. Result: "
         pretestresults2 = " seconds."
@@ -312,7 +314,7 @@ try:
         
         speedtestcompletedwindowclosemessage = "Close"
         
-        
+        connectingtospeedtestserversmessage = "Connecting to speedtest servers..."
     else:
         pretestresults = "The current language configuration is somehow invalid."
         pretestresults2 = "The current language configuration is somehow invalid."
@@ -423,7 +425,7 @@ try:
         currentvaluemessage = "The current language configuration is somehow invalid."
         gettingserversmessage = "The current language configuration is somehow invalid."
         gettingbestservermessage = "The currrent language configuration is somehow invalid."
-        
+        connectingtospeedtestserversmessage = "The current language configuration is somehow invalid."
         connectedtotestserversmessage = "The current language configuration is somehow invalid."
         
         
