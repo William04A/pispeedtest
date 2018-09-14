@@ -1,1 +1,2 @@
+Please do not modify this file! It contains an API-key for cloud-saving speedtests made with the application PiSpeedtest. (Swedish: Modifiera inte denna fil, tack! Den innehåller din API-nyckel för att ladda upp resultat i molnet med PiSpeedtest):
 API-key not created.
