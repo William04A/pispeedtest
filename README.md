@@ -1,44 +1,37 @@
 # π-speedtest
-
-**Messages:**
-
 -----
-### - A critical file writing error was found! Please update to PiSPeedtest 2.0.1 or higher in order to make sure that you can use PiSpeedtest!
-### As of the version PiSpeedtest 2.0, the package "beautifulsoup4" is needed in order to use the "check for updates" feature of PiSpeedtest. Some users might also have to install the "requests" package if it isn´t installed.
+A really easy way to run multiple automated speedtest on your computer using Speedtest.net. Powered by [speedtest-cli](https://github.com/sivel/speedtest-cli).
 
-### The image generation added in PiSpeedtest 2.5 also requires the Python package "Pillow" to be installed.
------
+_____________
+### Features:
+**Here are some of PiSpeedtest´s features:**
 
-##### Coming from a tutorial? The program has been changed in some ways, see "How to set up" for more information.
+ - The ability to process multiple speedtests using Speedtest.net.
+ - Lots of customization features like different result text formatting, different languages, custom speedtest duration and much more.
+ - Advanced features like free and unlimited cloudsaving of speedtest results and result image generation (see [this](https://image.ibb.co/ckjFUz/Screenshot_454.png) example).
+ - Automatic update checking, the ability to choose test servers, great error handing and much more!
 
+____________
+### Quickstart:
+Please see the [Wiki](https://github.com/William04A/pispeedtest/wiki/Quickstart) for a really good and detailed quickstart guide of PiSpeedtest. If you want to roughly know what to do, here is a super short version of the quickstart guide:
 
-### What is PiSpeedtest?
-PiSpeedtest is a code for easy measuring of internet speeds using Speedtest.net and Python. 
+ - You need to have Git and Python 3 installed (both applications needs to have the command line interface enabled).
+ - The follow Python modules are required to use PiSpeedtest´s all functions:
+  - `speedtest-cli` (Basic speedtesting code)
+ - `requests` (Update checking, connection verifying and more)
+ - `Pillow` (Speedtest results image generation)
+ - `beautifulsoup4` (Parsing the responses when checking for updates and more)
 
-### Manual installation:
-**Note: this method is not necessary as you can download/git clone this repository and run the file "automaticsetup.py".**
-The module/package used is "speedtest-cli" which can be easy retrived doing:
-` ` `
-pip install speedtest-cli
- ` ` `
- For additional stuff (update-checking and more), BeautifulSoup 4 is used. Install it using:
-  ` ` `
-  pip install beautifulsoup4
-   ` ` `
-  For PiSpeedtest result image generation, the library "Pillow" is used. "Pillow" can be installed with pip:
-  ` ` `
-  pip install Pillow
-   ` ` `
-### Release notes
-**See the code history for more information.**
-
-**(Documentation update):**
-
-Make sure to check out the in-progress Wiki! Just tap the "Wiki" tab above this text and all the contents of PiSpeedtest! The Wiki contains a good "Quickstart" guide (when I´m writing this) and will be updated with even more things in the future.
+(all of the mentioned modules above can be installed using pip).
 
 
-#### Application updates:
+**If you don´t want to do a manual setup, just run the file \"automaticsetup.py\" and all the required requirements for PiSpeedtest will be installed.
+________
+### Changelog/Updates:
+**Application updates:**
+
 **V4.0:**
+
 PiSpeedtest 4.0 is another major update to PiSpeedtest that includes these new things:
 - PiSpeedtest does now have more options when speedtesting. You can now choose what server to perform speedtests against or select servers automatic, like it has been in PiSpeedtest before. Being able to choose servers improves the accuracy some times.
 - You now get more information when processing speedtests.
@@ -118,23 +111,16 @@ makes PiSpeedtest even more customzieable and easy to use.
 - Initial code submitted.
 
 **Cloudserver updates:**
+
 **V1.1:**
+
 - Fixed a bug that used the upload results for both ping and uplod values while sending backups to the server. Unfortunately, this applied to all uploaded backups and all data uploaded to the cloud before 4th August 2018 is affected.
 
-### How to set up:
-#### HEADS UP:
-##### As with most software, 100% accurate results cannot be guaranteed. The program is powered by the speedtest-cli Python API.
-**Beta functions might not work properly. When you need as accurate results as possible, run the mode "STABLE" or "COMPATIBLE".**
-You can find a full tutorial with screenshots and more at https://github.com/William04A/pispeedtest/wiki/Quickstart.
-___________________________________________
-**Perhaps you´ve just read a tutorial and you found out that the version was different compared to the one showed there. Don´t be scared, here is how you start a speedtest:**
 
-- Run the mainprogram.py file.
-- Wait for a initial speedtest to be completed.
-- Choose a mode. For industrial usage, "STABLE" or "COMPATIBLE" is the best mode as it ensures that everything works to 100%. However, - "BETA" mode gives you the newest features that most likely will work.
-- Choose for how long you want to run the program and then press enter.
-- The next option currently depends on what mode you have chosen. Type in your choise and then press enter.
-- Choose a file name. Make sure to not include ".txt" in the end and don´t type in the name of a file that you already have used for speedtesting or other purposes before.
-- Now, wait for the speedtests to be run and then check the file with speedtestdata.
-**If you want to run older versions of the program that you´ve might seen in tutorials, check the "oldreleases" folder.**
-**Want to cancel the program? Ctrl+Z or Ctrl+C will work in most cases.**
+**Other updates:**
+
+(This section is not complete)
+_________
+### Accuracy information:
+ As with almost every speedtesting software, 100% accurate results cannot be guaranteed. Most results are rounded to the closest number without decimals. For more information, you can read the "Inconsistency" information [here](https://github.com/sivel/speedtest-cli). With that said, PiSpeedtest is really reliable and the results that you get will be pretty accurate. The application is trustworthy to use for speedtesting.
+________
