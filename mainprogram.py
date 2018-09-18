@@ -1402,8 +1402,6 @@ try:
             print(startingspeedtestmessage)
         else:
             print(invalidtextlayout)
-        print(speedteststartpopupmessage)
-        ctypes.windll.user32.MessageBoxW(None, startingspeedtestmessage, "PiSpeedtest", 0)
         steps = int(times)
 
         print("\n")
