@@ -25,7 +25,7 @@ Please see the [Wiki](https://github.com/William04A/pispeedtest/wiki/Quickstart)
 (all of the mentioned modules above can be installed using pip).
 
 
-**If you don´t want to do a manual setup, just run the file \"automaticsetup.py\" and all the required requirements for PiSpeedtest will be installed.
+**If you don´t want to do a manual setup, just run the file \"automaticsetup.py\" and all the required requirements for PiSpeedtest will be installed.**
 ________
 ### Changelog/Updates:
 **Application updates:**
