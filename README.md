@@ -30,6 +30,14 @@ ________
 ### Changelog/Updates:
 **Application updates:**
 
+**V4.3**:
+PiSpeedtest 4.3 is an enhancement update before the release of PiSpeedtest 4.5. This is what´s new:
+- A new updater.py file has been added to PiSpeedtest. It is an automatic updater that can update PiSpeedtest to the latest version
+(currently compatible with PiSpeedtest 3.0 and higher). Please note that the updater is in beta and only currently available in English. All your progress and your old pispeedtest folders will be saved during an update. The updater will only copy files from the version you run the updater on to the updated version.
+
+- Also, several changes has been made since PiSpeedtest 4.0 without calling it another major relase, so if you haven´t updated PiSpeedtest in a while and have PiSpeedtest 4.0 installed, make sure to update as this fixes some bugs from PiSpeedtest 4.0.
+
+
 **V4.0:**
 
 PiSpeedtest 4.0 is another major update to PiSpeedtest that includes these new things:
@@ -114,7 +122,7 @@ makes PiSpeedtest even more customzieable and easy to use.
 
 **V1.1:**
 
-- Fixed a bug that used the upload results for both ping and uplod values while sending backups to the server. Unfortunately, this applied to all uploaded backups and all data uploaded to the cloud before 4th August 2018 is affected.
+- Fixed a bug that used the upload results for both ping and upload values while sending backups to the server. Unfortunately, this applied to all uploaded backups and all data uploaded to the cloud before 4th August 2018 is affected.
 
 
 **Other updates:**
