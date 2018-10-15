@@ -11,8 +11,8 @@ try:
     from threading import Thread
 
     import subprocess
-    import ping3
 
+    
 
     # Defining errors - These are not implemented that much yet.
 
