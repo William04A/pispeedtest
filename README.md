@@ -34,6 +34,7 @@ ________
 
 
 **V4.5**:
+
 PiSpeedtest 4.5 includes one new, cool feature. It is also worth to note that an improved cloudserver and other things that will be added to PiSpeedtest 5.0, most likely the next major release of PiSpeedtest, is currently in development. However, this is what you will get with PiSpeedtest 4.5:
 - The initial test that PiSpeedtest does to verify your network connection has now been updated. Using two new modules "ping3" and "netifaces", your network gateway is also pinged, so that you will be able to identify if you have connection to your network gateway, but not to the internet.
 
