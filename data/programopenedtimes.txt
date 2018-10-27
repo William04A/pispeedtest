@@ -1,1 +1,1 @@
-This file is in BETA and just included with PiSpeedtest 4.5 because it is needed.
+0
