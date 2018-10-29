@@ -24,6 +24,7 @@ Please see the [Wiki](https://github.com/William04A/pispeedtest/wiki/Quickstart)
  
  - `netifaces` (Used for getting the adress of your network gateway)
  - `ping3` (Pinging your wifi network when performing initial tests)
+ - `tqdm` (For displaying progress bars in the cloudsaving setup program)
 (all of the mentioned modules above can be installed using pip).
 
 
