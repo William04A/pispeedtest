@@ -141,7 +141,7 @@ if option == "SETUP":
 
 
         if len(filecontents[1].replace(" ", "")) == 25 and len(re.findall(r"[A-Z]", filecontents[1].replace(" ", ""))) + len(re.findall(r"[a-z]", filecontents[1].replace(" ", ""))) == 20 and len(re.findall(r"[1-9]", filecontents[1].replace(" ", ""))) == 5:
-
+           
             print(apikeyalreadyexists)
 
             verify = input(verifyinput)
@@ -159,8 +159,11 @@ if option == "SETUP":
                 time.sleep(10)
                 raise QuitRequestedByUser("The user asked to quit the setup.")
         else:
-            print(invalidapikey)
-            verify = input(verifymessage)
+            if filecontents[1] == "API-key not created":
+                verify = "YES"
+            else:
+                print(invalidapikey)
+                verify = input(verifymessage)
 
             if verify == "YES":
                 print(contactingserver)
