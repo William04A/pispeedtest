@@ -33,10 +33,17 @@ ________
 ### Changelog/Updates:
 **Application updates:**
 
+**V4.6**:
+
+Unfortunately, some big and small bugs has been found in PiSpeedtest. These have now been fixed. Here is the changelog:
+
+- Fixed issue #1 (on GitHub) that made waiting between speedtests and speedtest calculations broken. These are two major bugs that have been around for a while, sadly. They are now fixed, so please re-clone PiSpeedtest if you have these errors.
+- Also, some other issues and bugs have been fixed. Another critical error has also been fixed, so please update PiSpeedtest.
 
 **V4.5**:
 
 PiSpeedtest 4.5 includes one new, cool feature. It is also worth to note that an improved cloudserver and other things that will be added to PiSpeedtest 5.0, most likely the next major release of PiSpeedtest, is currently in development. However, this is what you will get with PiSpeedtest 4.5:
+
 - The initial test that PiSpeedtest does to verify your network connection has now been updated. Using two new modules "ping3" and "netifaces", your network gateway is also pinged, so that you will be able to identify if you have connection to your network gateway, but not to the internet.
 
 **V4.3**:
