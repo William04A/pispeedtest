@@ -11,8 +11,8 @@ try:
     from threading import Thread
 
     import subprocess
+    import ping3
 
-    
 
     # Defining errors - These are not implemented that much yet.
 
@@ -50,7 +50,7 @@ try:
     smallestkbitsdown = 1000
     largestkbitsdown = 0
     noconnection = 0
-    fileversionnumber = "4.5"
+    fileversionnumber = "4.6"
     allowedmodes = ["BETA MODE", "STABLE", "COMPATIBLE"]
     loadconfig = [0, 0, 0, 0, 0]
 
@@ -805,16 +805,16 @@ try:
         if loadconfig[1] == 0:
             programdurationmode = input(programdurationmodemessage)
             if programdurationmode == "MINUTES":
-                times = int(input(programdurationminutes) * 60)
+                times = int(input(programdurationminutes)) * 60
             elif programdurationmode == "SECONDS":
                 times = int(input(programdurationseconds))
             else:
                 print(programdurationmodeerror)
-                times = int(input(programdurationminutes) * 60)
+                times = int(input(programdurationminutes)) * 60
         else:
-            times = configuredspeedtestduration
+            times = int(configuredspeedtestduration)
         if loadconfig[2] == 1:
-            interval = configuredruneverysecond
+            interval = int(configuredruneverysecond)
         else:
             interval = int(input(howofteninput + str(speedtesttime) + seconds))
         inputfilename = str(input(speedtestfilenameinput))
@@ -851,9 +851,8 @@ try:
             server = "Auto"
 
         print("\n")
-
-        wait = interval - int(speedtesttime)
-        repeat = times / wait
+        wait = int(interval) - int(speedtesttime)
+        repeat = int(times) / (wait)
 
         if wait < 1:
             print(waiterror + str(speedtesttime) + seconds + currentvaluemessage + str(wait))
@@ -898,7 +897,7 @@ try:
                     print(startingspeedtestmessage)
                     processpeedtest(0, filename=filedirectory, textlayout=configuredtextlayout, serverid=server)
                     print(speedtestcompletedmessage)
-                    time.sleep(0.5)
+                    time.sleep(wait)
                 except speedtest.NoMatchedServers:
                     ctypes.windll.user32.MessageBoxW(None, serverunavailablemessage, "PiSpeedtest", 0)
 
@@ -1135,12 +1134,12 @@ try:
         if loadconfig[1] == 0:
             programdurationmode = input(programdurationmodemessage)
             if programdurationmode == "MINUTES":
-                times = int(input(programdurationminutes) * 60)
+                times = int(input(programdurationminutes)) * 60
             elif programdurationmode == "SECONDS":
                 times = int(input(programdurationseconds))
             else:
                 print(programdurationmodeerror)
-                times = int(input(programdurationminutes) * 60)
+                times = int(input(programdurationminutes)) * 60
         else:
             times = configuredspeedtestduration
         if loadconfig[2] == 1:
@@ -1182,8 +1181,8 @@ try:
 
         print("\n")
 
-        wait = interval - int(speedtesttime)
-        repeat = times / wait
+        wait = int(interval) - int(speedtesttime)
+        repeat = int(times) / (wait)
 
         if wait < 1:
             print(waiterror + str(speedtesttime) + seconds + currentvaluemessage + str(wait))
@@ -1228,7 +1227,7 @@ try:
                     print(startingspeedtestmessage)
                     processpeedtest(0, filename=filedirectory, textlayout=configuredtextlayout, serverid=server)
                     print(speedtestcompletedmessage)
-                    time.sleep(0.5)
+                    time.sleep(wait)
                 except speedtest.NoMatchedServers:
                     ctypes.windll.user32.MessageBoxW(None, serverunavailablemessage, "PiSpeedtest", 0)
 
@@ -1464,12 +1463,12 @@ try:
         if loadconfig[1] == 0:
             programdurationmode = input(programdurationmodemessage)
             if programdurationmode == "MINUTES":
-                times = int(input(programdurationminutes) * 60)
+                times = int(input(programdurationminutes)) * 60
             elif programdurationmode == "SECONDS":
                 times = int(input(programdurationseconds))
             else:
                 print(programdurationmodeerror)
-                times = int(input(programdurationminutes) * 60)
+                times = int(input(programdurationminutes)) * 60
         else:
             times = configuredspeedtestduration
         if loadconfig[2] == 1:
@@ -1511,10 +1510,11 @@ try:
 
         print("\n")
 
-        wait = interval - int(speedtesttime)
-        repeat = times / wait
+        wait = int(interval) - int(speedtesttime)
 
+        repeat = int(times) / (wait)
         if wait < 1:
+
             print(waiterror + str(speedtesttime) + seconds + currentvaluemessage + str(wait))
 
             exit()
@@ -1775,6 +1775,7 @@ try:
         raise NoModeDefinded("\"" + mode + "\"" + " is not a valid mode.")
 
 except Exception as e:
+    raise e
     print(erroroccurred + " (" + str(e) + ").")
     saveexceptioninfo(e, "PiSpeedtest")
 
@@ -1819,7 +1820,7 @@ except Exception as e:
     saveexceptioninfo(e, "Main program")
 finally:
     print("\n")
-    
+
     try:
         input(pressenterkeymessage)
 
