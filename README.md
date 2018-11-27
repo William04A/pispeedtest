@@ -147,9 +147,9 @@ makes PiSpeedtest even more customzieable and easy to use.
 (This section is not complete)
 _________
 ### For more information:
-If you want guides and more information about PiSpeedtest, please check the [Wiki](https://github.com/pispeedtest/Wiki).
-Starting from PiSpeedtest 5.0, application updates will be documented at the [Projects](https://github.com/pispeedtest/Projects) page.
-Issues can be found on the [Issues](https://github.com/pispeedtest/Issues) page. If I, the PiSpeedtest main developer, finds any errors and/or exceptions, I will open an issue there and then update its progress. And everyone are free to open Issues and contribute to PiSpeedtest in any way, of course.
+If you want guides and more information about PiSpeedtest, please check the [Wiki](https://github.com/William04A/pispeedtest/Wiki).
+Starting from PiSpeedtest 5.0, application updates will be documented at the [Projects](https://github.com/William04A/pispeedtest/Projects) page.
+Issues can be found on the [Issues](https://github.com/William04A/pispeedtest/Issues) page. If I, the PiSpeedtest main developer, finds any errors and/or exceptions, I will open an issue there and then update its progress. And everyone are free to open Issues and contribute to PiSpeedtest in any way, of course.
 _________
 ### Accuracy information:
  As with almost every speedtesting software, 100% accurate results cannot be guaranteed. Most results are rounded to the closest number without decimals. For more information, you can read the "Inconsistency" information [here](https://github.com/sivel/speedtest-cli). With that said, PiSpeedtest is really reliable and the results that you get will be pretty accurate. The application is trustworthy to use for speedtesting.
