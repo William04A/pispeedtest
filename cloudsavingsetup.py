@@ -3,9 +3,8 @@ import os
 import requests
 import time
 import re
-from tqdm import tqdm
-
 import random
+
 import string
 validlanguages = ["sv-se", "en-us"]
 class PiSpeedtestExceptions(Exception):
