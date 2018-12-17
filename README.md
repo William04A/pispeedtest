@@ -33,6 +33,15 @@ ________
 ### Changelog/Updates:
 **Application updates:**
 
+**V5.0:**
+
+A new release for PiSpeedtest has now been released! Here are the release notes:
+
+- Fixed several bugs, including cloudsaving bugs and some bugs in the automatic updater.
+- Added a new cronjob mode that can be used with task managers like cron. The mode only completes speedtest, network test or both and then automatically saves the results and a detailed log. Perfect for network monitoring. The mode can be initilized with just some arguments in the command line. Take a look at the GitHub repository in a few days to see a tutorial!
+- The PiSpeedtest cloudsaving has a new default style and several new styles as well, like a dark mode. You can select a desired mode by clicking at "Pick a different style for this page" when viewing speedtest results saved in the cloud.
+- Also, the automatic setup has been updated with all the latest requirements for PiSpeedtest!
+
 **V4.6**:
 
 Unfortunately, some big and small bugs has been found in PiSpeedtest. These have now been fixed. Here is the changelog:
