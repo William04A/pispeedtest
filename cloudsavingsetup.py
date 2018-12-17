@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import sys
 
-from utilites.sharedcode import currentversion
+from utilities.sharedcode import currentversion
 import datetime
 
 import os
