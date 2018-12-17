@@ -687,9 +687,9 @@ try:
         noconnection = 1
 
         internetconnection_str = "✘"
-        print(
-            detailsmessage + networkgatewayconnection_str + " " + networkgatewayconnectionname + " " + "|" + " " + internetconnection_str + " " + internetconnectionname + " " + ".")
+        print(detailsmessage + networkgatewayconnection_str + " " + networkgatewayconnectionname + " " + "|" + " " + internetconnection_str + " " + internetconnectionname + " " + ".")
 
+        
         raise NoInternetConnection(nointernetconnectionmessage)
     except ImportError:
         print(modulerequirementsmessage + "\nrequests (pip install requests)\nnetifaces (pip install netifaces)\nping3 (pip install ping3)")
@@ -720,34 +720,33 @@ try:
                 if float(releasemessageversionnumber) == float(latestversionnumber):
                     soup = BeautifulSoup(releasemessage.text, "html.parser")
                     messagefornewrelease = str(soup.get_text())
-                    print(
-                        newversionmessage + latestversionnumber + newversionmessage2 + fileversionnumber + newversionmessage3)
+                    print(newversionmessage + latestversionnumber + newversionmessage2 + fileversionnumber + newversionmessage3)
+                    
                     print(releasemessageinformation + "\n" + messagefornewrelease)
                 else:
-                    print(
-                        newversionmessage + latestversionnumber + newversionmessage2 + fileversionnumber + newversionmessage3)
+                    print(newversionmessage + latestversionnumber + newversionmessage2 + fileversionnumber + newversionmessage3)
             except:
-                print(
-                    newversionmessage + latestversionnumber + newversionmessage2 + fileversionnumber + newversionmessage3)
+                print(newversionmessage + latestversionnumber + newversionmessage2 + fileversionnumber + newversionmessage3)
     except Exception as e:
         print(lookingforupdateserror + " (" + str(e) + ").")
     print("\n")
     with open(os.path.join(os.getcwd() + "\\cloudsaving\\savedata\\status.txt"), "r") as cloudsavingstatustextfile:
         filecontents = cloudsavingstatustextfile.read().splitlines()
-    if filecontents[0] == "ENABLED":
-        print(cloudsavingenabled)
-    elif filecontents[0] == "OFF":
-        print(cloudsavingturnedoff)
-    elif filecontents[0] == "NOT CONFIGURED":
-        print(cloudsavingnotconfigured)
-        confirm = input(configurecloudsavingmessage)
-        if confirm == "ENABLE":
-            import cloudsavingsetup
+    #The cloudsaving setup from inside the program is diabled right now.
+    #if filecontents[0] == "ENABLED":
+        #print(cloudsavingenabled)
+    #elif filecontents[0] == "OFF":
+        #print(cloudsavingturnedoff)
+    #elif filecontents[0] == "NOT CONFIGURED":
+        #print(cloudsavingnotconfigured)
+        #confirm = input(configurecloudsavingmessage)
+        #if confirm == "ENABLE":
+            #import cloudsavingsetup
 
-            cloudsavingsetup.setup()
-        else:
+            #cloudsavingsetup.setup()
+        #else:
 
-            print(skipingcloudsavingsetupmessage)
+            #print(skipingcloudsavingsetupmessage)
 
     with open(os.path.join(os.getcwd() + "\\data\\programopenedtimes.txt"), "r+") as programopenedtimesfile:
         filecontents = programopenedtimesfile.read().splitlines()
