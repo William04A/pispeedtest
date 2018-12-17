@@ -732,21 +732,20 @@ try:
     print("\n")
     with open(os.path.join(os.getcwd() + "\\cloudsaving\\savedata\\status.txt"), "r") as cloudsavingstatustextfile:
         filecontents = cloudsavingstatustextfile.read().splitlines()
-    #The cloudsaving setup from inside the program is diabled right now.
-    #if filecontents[0] == "ENABLED":
-        #print(cloudsavingenabled)
-    #elif filecontents[0] == "OFF":
-        #print(cloudsavingturnedoff)
-    #elif filecontents[0] == "NOT CONFIGURED":
-        #print(cloudsavingnotconfigured)
-        #confirm = input(configurecloudsavingmessage)
-        #if confirm == "ENABLE":
-            #import cloudsavingsetup
+    if filecontents[0] == "ENABLED":
+        print(cloudsavingenabled)
+    elif filecontents[0] == "OFF":
+        print(cloudsavingturnedoff)
+    elif filecontents[0] == "NOT CONFIGURED":
+        print(cloudsavingnotconfigured)
+        confirm = input(configurecloudsavingmessage)
+        if confirm == "ENABLE":
+            import cloudsavingsetup
 
-            #cloudsavingsetup.setup()
-        #else:
+            cloudsavingsetup.setup()
+        else:
 
-            #print(skipingcloudsavingsetupmessage)
+            print(skipingcloudsavingsetupmessage)
 
     with open(os.path.join(os.getcwd() + "\\data\\programopenedtimes.txt"), "r+") as programopenedtimesfile:
         filecontents = programopenedtimesfile.read().splitlines()
