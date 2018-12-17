@@ -1862,7 +1862,6 @@ try:
         raise NoModeDefinded("\"" + mode + "\"" + " is not a valid mode.")
 
 except Exception as e:
-    raise e
     print(erroroccurred + " (" + str(e) + ").")
     saveexceptioninfo(e, "PiSpeedtest")
 
