@@ -9,11 +9,14 @@ try:
 
     from tkinter.font import Font
     from threading import Thread
-
+    import random
     import subprocess
+
     import ping3
+    import sys
 
-
+    import datetime
+    import multiprocessing
     # Defining errors - These are not implemented that much yet.
 
     def __main__():
@@ -50,7 +53,7 @@ try:
     smallestkbitsdown = 1000
     largestkbitsdown = 0
     noconnection = 0
-    fileversionnumber = "4.6"
+    fileversionnumber = "5.0"
     allowedmodes = ["BETA MODE", "STABLE", "COMPATIBLE"]
     loadconfig = [0, 0, 0, 0, 0]
 
@@ -211,6 +214,7 @@ try:
         startingpretestmessage = "Startar internetuppkopplings-verifierings-test."
         networkgatewayipadressmesage = "Nätverks-gateway/routers IP-adress: "
         pingingnetworkmessage = "Pingar nätverk..."
+        cloudserverresponsemessage = "Svar från molnlagringsservern: "
     elif languageconfiguration == "en-us":
         pretestresults = "Pre-test-result: Ping to https://www.google.com. Result: "
         pretestresults2 = " seconds."
@@ -299,7 +303,7 @@ try:
 
         generatingspeedtestreportmessage = "Generating speedtest report..."
         savedspeedtestreportmessage = "A speedtest report has been saved."
-        cloudserverreponsemessage = "Cloudsaving server response: "
+        cloudserverresponsemessage = "Cloudsaving server response: "
         viewresultslinkmessage = "View your speedtest results here: "
         downloadresultslinkmessage = "Additionally, the speedtest results can be downloaded here: "
 
@@ -434,7 +438,7 @@ try:
         speedtestimagesaved = "The current language configuration is somehow invalid."
         generatingspeedtestreportmessage = "The current language configuration is somehow invalid."
         savedspeedtestreportmessage = "The current language configuration is somehow invalid."
-        cloudserverreponsemessage = "The current language configuration is somehow invalid."
+        cloudserverresponsemessage = "The current language configuration is somehow invalid."
         viewresultslinkmessage = "The current language configuration is somehow invalid."
         downloadresultslinkmessage = "The current language configuration is somehow invalid."
 
@@ -526,8 +530,7 @@ try:
             elif textlayout == "Lists":
                 fullresults = str(downloadlist) + ", " + str(uploadlist) + ", " + str(downloadlist) + "."
             elif textlayout == "Detailed-text":
-                fullresults = "A test at " + str(
-                    time.ctime()) + " has been run. " + "The results was " + " Download speed (mbit/s): " + download + " Upload speed (mbit/s): " + upload + " Ping (milliseconds): " + ping + "."
+                fullresults = "A test at " + str(time.ctime()) + " has been run. " + "The results was " + " Download speed (mbit/s): " + download + " Upload speed (mbit/s): " + upload + " Ping (milliseconds): " + ping + "."
             elif textlayout == "With-units":
                 fullresults = "Results: " + " Download: " + download + " mbit/s " + " Upload: " + upload + " mbit/s " + " Ping: " + ping + " milliseconds" + "."
             print(fullresults)
@@ -564,8 +567,95 @@ try:
         with open(os.path.join(os.getcwd() + "\\exceptionlog.txt"), "a+") as exceptionlogfile:
             exceptionlogfile.write(
                 "\n" + "[ERROR/EXCEPTION on " + codepart + " at " + exceptiontime + ".]" + " Full exception: " + exceptiontext + ".")
+    try:
 
+        value = sys.argv[1]
+        sysargument = "Ok"
+    except IndexError:
+        sysargument = None
+    if sysargument is not None:
+        if sys.argv[1] is not None:
+            if sys.argv[1].lower() == "-cronjob":
+                print("PiSpeedtest detected a cronjob input.")
+                print("Cronjobs include these features:")
+                print("- Only one speedtest will be run. Your internet connection has already been verified and saved to the file \"chronjoblog.txt\" in the directory \"chronjobs\".")
+                print("- Depending on if you have included \"-networkonly\" or \"-speedtestonly\" as arguments, only certain types of speedtests will be run.")
+                print("PLEASE NOTE: If you want to run both a network test and a speedtest, do not include any other arguments than \"-chronjob\"!")
+                print("###CRONJOB INITIALIZED###")
+                print("This output is only available in English and prints lots of information in order to simplify debugging.")
+                print("\"Detecting\" time (for entertainment purposes only).")
+                for repeat in range(19):
+                    sys.stdout.write("\r" + str(datetime.datetime.now() - datetime.timedelta(days=random.randint(1,10))))
+                    sys.stdout.flush()
+                    time.sleep(0.1)
+                sys.stdout.write("\r" + str(datetime.datetime.now()))
+                sys.stdout.flush()
+                print("\n")
+                def networktest_chronjob():
+                    print("NOTICE: Some log output related to the network test below will be in the language selected in the file \"languageconfiguration.txt\".")
+                    try:
+                        import netifaces
+                        import requests
+                        import ping3
 
+                        print(startingpretestmessage)
+                        networkgateways = netifaces.gateways()
+                        networkgateway = networkgateways["default"][netifaces.AF_INET][0]
+                        print(networkgatewayipadressmesage + networkgateway + ".")
+                        print(pingingnetworkmessage)
+                        systempingcommand = "ping " + networkgateway
+                        networkping = ping3.ping(dest_addr=networkgateway)
+
+                        if networkping == None:
+                            print(pingnotsuccessfulmessage)
+                            networkgatewayconnection = 0
+                            networkgatewayconnection_str = "✘"
+                            raise requests.exceptions.ConnectionError
+                        else:
+                            print(pingsuccessfullysentmessage)
+                            networkgatewayconnection = 1
+                            networkgatewayconnection_str = "✔"
+                        request = requests.get("https://www.google.com")
+                        internetconnection_str = "✔"
+                        print(pretestresults + str(request.elapsed.total_seconds()) + pretestresults2)
+                    except requests.exceptions.ConnectionError:
+                        print(nointernetconnectionmessage)
+
+                        noconnection = 1
+
+                        internetconnection_str = "✘"
+                        print(detailsmessage + networkgatewayconnection_str + " " + networkgatewayconnectionname + " " + "|" + " " + internetconnection_str + " " + internetconnectionname + " " + ".")
+
+                    except ImportError:
+                        print(modulerequirementsmessage + "\nrequests (pip install requests)\nnetifaces (pip install netifaces)\nping3 (pip install ping3)")
+                    print(detailsmessage + networkgatewayconnection_str + " " + networkgatewayconnectionname + " " + "|" + " " + internetconnection_str + " " + internetconnectionname + " " + ".")
+                def speedtest_chronjob():
+                    speedtestlogfilename_chronjob = "\\chronjobs\\logs\\speedtestlog_" + str(datetime.datetime.now().date()) + ".txt".replace(" ", "")
+                    processpeedtest(False, os.path.join(os.getcwd() + "\\" + speedtestlogfilename_chronjob), "Text", "Auto")
+                if "-networkonly" in sys.argv:
+                    print("Detected the argument \"-networkonly\". Starting network test and saving to log file /cronjobs/logs/networktestlog.txt")
+                    print("Starting network test at " + str(datetime.datetime.now()) + ".")
+                    networktest_chronjob()
+                elif "-speedtestonly" in sys.argv:
+                    print("Detected the argument \"-speedtestonly\". Starting speedtest and saving to log file /cronjobs/logs/speedtestlog.txt")
+                    print("Starting speedtest at " + str(datetime.datetime.now()) + ".")
+                    speedtest_chronjob()
+
+                    print("Speedtest completed and saved to log file. Closing program...")
+                    exit()
+                else:
+                    print("Did not detect any specific arguments like \"-networkonly\". Starting network test...")
+                    print("Starting network test at " + str(datetime.datetime.now()) + ".")
+                    print("NOTICE: Some log output related to the network test below will be in the language selected in the file \"languageconfiguration.txt\".")
+                    networktest_chronjob()
+                    print("Network test completed.")
+                    print("Starting speedtest at " + str(datetime.datetime.now()) + ".")
+                    speedtest_chronjob()
+                    print("Speedtest completed.")
+                print("\n")
+            else:
+                print("Unknown argument \"" + sys.argv[1].lower() + "\".")
+            print("Chronjob complete, exiting program...")
     try:
         import netifaces
         import requests
@@ -602,9 +692,9 @@ try:
 
         raise NoInternetConnection(nointernetconnectionmessage)
     except ImportError:
-        print(modulerequirementsmessage + "\nrequests (pip install requests)\nnetifaces (pip install netifaces)\nping3")
-    print(
-        detailsmessage + networkgatewayconnection_str + " " + networkgatewayconnectionname + " " + "|" + " " + internetconnection_str + " " + internetconnectionname + " " + ".")
+        print(modulerequirementsmessage + "\nrequests (pip install requests)\nnetifaces (pip install netifaces)\nping3 (pip install ping3)")
+    print(detailsmessage + networkgatewayconnection_str + " " + networkgatewayconnectionname + " " + "|" + " " + internetconnection_str + " " + internetconnectionname + " " + ".")
+
     print(lookingforupdatesmessage)
     print("\n")
     try:
@@ -709,7 +799,7 @@ try:
         speedtestaccuracymodefound()
         if noconnection == 0:
             timeone1 = time.time()
-            processspeedtest_onlyupload("initialspeedtests.txt")
+            #processspeedtest_onlyupload("initialspeedtests.txt")
             speedtesttime = str(round((time.time() - timeone1) * 2))
             print(speedtestran + str(round(int(speedtesttime) / 2)) + speedtestseconds + " " + fastspeedtest)
 
@@ -874,6 +964,7 @@ try:
             print(startingspeedtestmessage)
         else:
             print(invalidtextlayout)
+            configuredtextlayout = "Text"
         print(speedteststartpopupmessage)
         ctypes.windll.user32.MessageBoxW(None, startingspeedtestmessage, "PiSpeedtest", 0)
         steps = int(times)
@@ -889,11 +980,8 @@ try:
             speedtestconfig = speedtestdata.config
             ipadress = speedtestconfig.get("client").get("ip")
             isp = speedtestconfig.get("client").get("isp")
-            print(connectedtotestserversmessage + " IP Adress: " + str(
-                ipadress) + "." + " ISP (Internet Service Provider): " + str(isp) + ".")
             for speedtestindex in range(repeat):
                 try:
-
                     print(startingspeedtestmessage)
                     processpeedtest(0, filename=filedirectory, textlayout=configuredtextlayout, serverid=server)
                     print(speedtestcompletedmessage)
@@ -1041,7 +1129,7 @@ try:
 
                     upload_url = "https://pispeedtestcloudsaving.pythonanywhere.com/upload-results/" + cloudsavingapikey + "/" + inputfilename + "/" + download_data + "/" + upload_data + "/" + ping_data
                     pispeedtestuploadresultstocloudrequest = requests.get(upload_url)
-                    print(cloudserverreponsemessage + pispeedtestuploadresultstocloudrequest.text + ".")
+                    print(cloudserverresponsemessage + pispeedtestuploadresultstocloudrequest.text + ".")
                     if "A file with the name" in pispeedtestuploadresultstocloudrequest.text:
                         print(
                             viewresultslinkmessage + "https://pispeedtestcloudsaving.pythonanywhere.com" + pispeedtestuploadresultstocloudrequest.text.replace(
@@ -1219,8 +1307,7 @@ try:
             speedtestconfig = speedtestdata.config
             ipadress = speedtestconfig.get("client").get("ip")
             isp = speedtestconfig.get("client").get("isp")
-            print(connectedtotestserversmessage + " IP Adress: " + str(
-                ipadress) + "." + " ISP (Internet Service Provider): " + str(isp) + ".")
+            print(connectedtotestserversmessage + " IP Adress: " + str(ipadress) + "." + " ISP (Internet Service Provider): " + str(isp) + ".")
             for speedtestindex in range(repeat):
                 try:
 
@@ -1371,7 +1458,7 @@ try:
 
                     upload_url = "https://pispeedtestcloudsaving.pythonanywhere.com/upload-results/" + cloudsavingapikey + "/" + inputfilename + "/" + download_data + "/" + upload_data + "/" + ping_data
                     pispeedtestuploadresultstocloudrequest = requests.get(upload_url)
-                    print(cloudserverreponsemessage + pispeedtestuploadresultstocloudrequest.text + ".")
+                    print(cloudserverresponsemessage + pispeedtestuploadresultstocloudrequest.text + ".")
                     if "A file with the name" in pispeedtestuploadresultstocloudrequest.text:
                         print(
                             viewresultslinkmessage + "https://pispeedtestcloudsaving.pythonanywhere.com" + pispeedtestuploadresultstocloudrequest.text.replace(
@@ -1685,7 +1772,7 @@ try:
 
                     upload_url = "https://pispeedtestcloudsaving.pythonanywhere.com/upload-results/" + cloudsavingapikey + "/" + inputfilename + "/" + download_data + "/" + upload_data + "/" + ping_data
                     pispeedtestuploadresultstocloudrequest = requests.get(upload_url)
-                    print(cloudserverreponsemessage + pispeedtestuploadresultstocloudrequest.text + ".")
+                    print(cloudserverresponsemessage + pispeedtestuploadresultstocloudrequest.text + ".")
                     if "A file with the name" in pispeedtestuploadresultstocloudrequest.text:
                         print(
                             viewresultslinkmessage + "https://pispeedtestcloudsaving.pythonanywhere.com" + pispeedtestuploadresultstocloudrequest.text.replace(
