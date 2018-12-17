@@ -797,7 +797,7 @@ try:
         speedtestaccuracymodefound()
         if noconnection == 0:
             timeone1 = time.time()
-            #processspeedtest_onlyupload("initialspeedtests.txt")
+            processspeedtest_onlyupload("initialspeedtests.txt")
             speedtesttime = str(round((time.time() - timeone1) * 2))
             print(speedtestran + str(round(int(speedtesttime) / 2)) + speedtestseconds + " " + fastspeedtest)
 
