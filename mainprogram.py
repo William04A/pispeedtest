@@ -681,7 +681,10 @@ try:
             else:
                 print("Unknown argument \"" + sys.argv[1].lower() + "\".")
             print("cronjob complete, exiting program...")
+            cronjob = True
             exit()
+    else:
+        cronjob = False
     try:
         import netifaces
         import requests
@@ -1938,9 +1941,9 @@ except Exception as e:
     saveexceptioninfo(e, "Main program")
 finally:
     print("\n")
+    if cronjob == False:
+        try:
+            input(pressenterkeymessage)
 
-    try:
-        input(pressenterkeymessage)
-
-    except ValueError:
-        exit()
+        except ValueError:
+            exit()
