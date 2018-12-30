@@ -681,6 +681,7 @@ try:
             else:
                 print("Unknown argument \"" + sys.argv[1].lower() + "\".")
             print("cronjob complete, exiting program...")
+            exit()
     try:
         import netifaces
         import requests
