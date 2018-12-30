@@ -1,0 +1,2 @@
+In this directory, you can find logs that PiSpeedtest has saved when performing speedtests using the "cronjob mode", which can be accessed from the terminal/command prompt on your computer.
+More information about PiSpeedtest´s "cronjob mode" is available at: https://github.com/William04A/pispeedtest/wiki/Using-the-cronjob-mode.
