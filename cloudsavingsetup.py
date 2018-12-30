@@ -43,7 +43,7 @@ try:
                         "Please do not modify this file! It contains an API-key for cloud-saving speedtests made with the application PiSpeedtest." + "\n")
 
                     apikeytextfile.write(apikey + "\n")
-                with open(os.path.join(os.getcwd() + "\\cloudsaving\\savedata\\status.txt"), ) as cloudsavingstatusfile:
+                with open(os.path.join(os.getcwd() + "\\cloudsaving\\savedata\\status.txt"), "w+") as cloudsavingstatusfile:
 
                     cloudsavingstatusfile.truncate()
                     cloudsavingstatusfile.write("ENABLED" + "\n")
