@@ -53,7 +53,7 @@ try:
     smallestkbitsdown = 1000
     largestkbitsdown = 0
     noconnection = 0
-    fileversionnumber = "5.0"
+    fileversionnumber = "5.01"
     allowedmodes = ["BETA MODE", "STABLE", "COMPATIBLE"]
     loadconfig = [0, 0, 0, 0, 0]
 
