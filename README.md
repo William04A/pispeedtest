@@ -34,6 +34,7 @@ ________
 **Application updates:**
 
 **V5.0.1:**
+
 This PiSpeedtest release fixes some bugs found in PiSpeedtest 5.0 and also some earlier versions:
 
 - The "cronjob mode" introduced in PiSpeedtest 5.0 now works properly and is properly documented. You can find the documentation [here](https://github.com/William04A/pispeedtest/wiki/Using-the-cronjob-mode).
