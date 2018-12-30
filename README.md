@@ -33,6 +33,12 @@ ________
 ### Changelog/Updates:
 **Application updates:**
 
+**V5.0.1:**
+This PiSpeedtest release fixes some bugs found in PiSpeedtest 5.0 and also some earlier versions:
+
+- The "cronjob mode" introduced in PiSpeedtest 5.0 now works properly and is properly documented. You can find the documentation [here](https://github.com/William04A/pispeedtest/wiki/Using-the-cronjob-mode).
+- Did you ever get the message "File not open for writing" while trying to setup cloudsaving? If so, please update PiSpeedtest. This pretty major issue has now been fixed.
+
 **V5.0:**
 
 A new release for PiSpeedtest has now been released! Here are the release notes:
