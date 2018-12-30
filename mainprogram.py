@@ -17,6 +17,8 @@ try:
 
     import datetime
     import multiprocessing
+
+
     # Defining errors - These are not implemented that much yet.
 
     def __main__():
@@ -530,7 +532,8 @@ try:
             elif textlayout == "Lists":
                 fullresults = str(downloadlist) + ", " + str(uploadlist) + ", " + str(downloadlist) + "."
             elif textlayout == "Detailed-text":
-                fullresults = "A test at " + str(time.ctime()) + " has been run. " + "The results was " + " Download speed (mbit/s): " + download + " Upload speed (mbit/s): " + upload + " Ping (milliseconds): " + ping + "."
+                fullresults = "A test at " + str(
+                    time.ctime()) + " has been run. " + "The results was " + " Download speed (mbit/s): " + download + " Upload speed (mbit/s): " + upload + " Ping (milliseconds): " + ping + "."
             elif textlayout == "With-units":
                 fullresults = "Results: " + " Download: " + download + " mbit/s " + " Upload: " + upload + " mbit/s " + " Ping: " + ping + " milliseconds" + "."
             print(fullresults)
@@ -567,6 +570,8 @@ try:
         with open(os.path.join(os.getcwd() + "\\exceptionlog.txt"), "a+") as exceptionlogfile:
             exceptionlogfile.write(
                 "\n" + "[ERROR/EXCEPTION on " + codepart + " at " + exceptiontime + ".]" + " Full exception: " + exceptiontext + ".")
+
+
     try:
 
         value = sys.argv[1]
@@ -578,21 +583,29 @@ try:
             if sys.argv[1].lower() == "-cronjob":
                 print("PiSpeedtest detected a cronjob input.")
                 print("Cronjobs include these features:")
-                print("- Only one speedtest will be run. Your internet connection has already been verified and saved to the file \"chronjoblog.txt\" in the directory \"chronjobs\".")
-                print("- Depending on if you have included \"-networkonly\" or \"-speedtestonly\" as arguments, only certain types of speedtests will be run.")
-                print("PLEASE NOTE: If you want to run both a network test and a speedtest, do not include any other arguments than \"-chronjob\"!")
+                print(
+                    "- Only one speedtest will be run. Your internet connection has already been verified and saved to the file \"cronjoblog.txt\" in the directory \"cronjobs\".")
+                print(
+                    "- Depending on if you have included \"-networkonly\" or \"-speedtestonly\" as arguments, only certain types of speedtests will be run.")
+                print(
+                    "PLEASE NOTE: If you want to run both a network test and a speedtest, do not include any other arguments than \"-cronjob\"!")
                 print("###CRONJOB INITIALIZED###")
-                print("This output is only available in English and prints lots of information in order to simplify debugging.")
+                print(
+                    "This output is only available in English and prints lots of information in order to simplify debugging.")
                 print("\"Detecting\" time (for entertainment purposes only).")
                 for repeat in range(19):
-                    sys.stdout.write("\r" + str(datetime.datetime.now() - datetime.timedelta(days=random.randint(1,10))))
+                    sys.stdout.write(
+                        "\r" + str(datetime.datetime.now() - datetime.timedelta(days=random.randint(1, 10))))
                     sys.stdout.flush()
                     time.sleep(0.1)
                 sys.stdout.write("\r" + str(datetime.datetime.now()))
                 sys.stdout.flush()
                 print("\n")
-                def networktest_chronjob():
-                    print("NOTICE: Some log output related to the network test below will be in the language selected in the file \"languageconfiguration.txt\".")
+
+
+                def networktest_cronjob():
+                    print(
+                        "NOTICE: Some log output related to the network test below will be in the language selected in the file \"languageconfiguration.txt\".")
                     try:
                         import netifaces
                         import requests
@@ -624,38 +637,50 @@ try:
                         noconnection = 1
 
                         internetconnection_str = "✘"
-                        print(detailsmessage + networkgatewayconnection_str + " " + networkgatewayconnectionname + " " + "|" + " " + internetconnection_str + " " + internetconnectionname + " " + ".")
+                        print(
+                            detailsmessage + networkgatewayconnection_str + " " + networkgatewayconnectionname + " " + "|" + " " + internetconnection_str + " " + internetconnectionname + " " + ".")
 
                     except ImportError:
-                        print(modulerequirementsmessage + "\nrequests (pip install requests)\nnetifaces (pip install netifaces)\nping3 (pip install ping3)")
-                    print(detailsmessage + networkgatewayconnection_str + " " + networkgatewayconnectionname + " " + "|" + " " + internetconnection_str + " " + internetconnectionname + " " + ".")
-                def speedtest_chronjob():
-                    speedtestlogfilename_chronjob = "\\chronjobs\\logs\\speedtestlog_" + str(datetime.datetime.now().date()) + ".txt".replace(" ", "")
-                    processpeedtest(False, os.path.join(os.getcwd() + "\\" + speedtestlogfilename_chronjob), "Text", "Auto")
+                        print(
+                            modulerequirementsmessage + "\nrequests (pip install requests)\nnetifaces (pip install netifaces)\nping3 (pip install ping3)")
+                    print(
+                        detailsmessage + networkgatewayconnection_str + " " + networkgatewayconnectionname + " " + "|" + " " + internetconnection_str + " " + internetconnectionname + " " + ".")
+
+
+                def speedtest_cronjob():
+                    speedtestlogfilename_cronjob = "\\cronjobs\\logs\\speedtestlog_" + str(
+                        datetime.datetime.now().date()) + ".txt".replace(" ", "")
+                    processpeedtest(False, os.path.join(os.getcwd() + "\\" + speedtestlogfilename_cronjob), "Text",
+                                    "Auto")
+
+
                 if "-networkonly" in sys.argv:
-                    print("Detected the argument \"-networkonly\". Starting network test and saving to log file /cronjobs/logs/networktestlog.txt")
+                    print(
+                        "Detected the argument \"-networkonly\". Starting network test and saving to log file /cronjobs/logs/networktestlog.txt")
                     print("Starting network test at " + str(datetime.datetime.now()) + ".")
-                    networktest_chronjob()
+                    networktest_cronjob()
                 elif "-speedtestonly" in sys.argv:
-                    print("Detected the argument \"-speedtestonly\". Starting speedtest and saving to log file /cronjobs/logs/speedtestlog.txt")
+                    print(
+                        "Detected the argument \"-speedtestonly\". Starting speedtest and saving to log file /cronjobs/logs/speedtestlog.txt")
                     print("Starting speedtest at " + str(datetime.datetime.now()) + ".")
-                    speedtest_chronjob()
+                    speedtest_cronjob()
 
                     print("Speedtest completed and saved to log file. Closing program...")
                     exit()
                 else:
                     print("Did not detect any specific arguments like \"-networkonly\". Starting network test...")
                     print("Starting network test at " + str(datetime.datetime.now()) + ".")
-                    print("NOTICE: Some log output related to the network test below will be in the language selected in the file \"languageconfiguration.txt\".")
-                    networktest_chronjob()
+                    print(
+                        "NOTICE: Some log output related to the network test below will be in the language selected in the file \"languageconfiguration.txt\".")
+                    networktest_cronjob()
                     print("Network test completed.")
                     print("Starting speedtest at " + str(datetime.datetime.now()) + ".")
-                    speedtest_chronjob()
+                    speedtest_cronjob()
                     print("Speedtest completed.")
                 print("\n")
             else:
                 print("Unknown argument \"" + sys.argv[1].lower() + "\".")
-            print("Chronjob complete, exiting program...")
+            print("cronjob complete, exiting program...")
     try:
         import netifaces
         import requests
@@ -687,13 +712,15 @@ try:
         noconnection = 1
 
         internetconnection_str = "✘"
-        print(detailsmessage + networkgatewayconnection_str + " " + networkgatewayconnectionname + " " + "|" + " " + internetconnection_str + " " + internetconnectionname + " " + ".")
+        print(
+            detailsmessage + networkgatewayconnection_str + " " + networkgatewayconnectionname + " " + "|" + " " + internetconnection_str + " " + internetconnectionname + " " + ".")
 
-        
         raise NoInternetConnection(nointernetconnectionmessage)
     except ImportError:
-        print(modulerequirementsmessage + "\nrequests (pip install requests)\nnetifaces (pip install netifaces)\nping3 (pip install ping3)")
-    print(detailsmessage + networkgatewayconnection_str + " " + networkgatewayconnectionname + " " + "|" + " " + internetconnection_str + " " + internetconnectionname + " " + ".")
+        print(
+            modulerequirementsmessage + "\nrequests (pip install requests)\nnetifaces (pip install netifaces)\nping3 (pip install ping3)")
+    print(
+        detailsmessage + networkgatewayconnection_str + " " + networkgatewayconnectionname + " " + "|" + " " + internetconnection_str + " " + internetconnectionname + " " + ".")
 
     print(lookingforupdatesmessage)
     print("\n")
@@ -720,13 +747,16 @@ try:
                 if float(releasemessageversionnumber) == float(latestversionnumber):
                     soup = BeautifulSoup(releasemessage.text, "html.parser")
                     messagefornewrelease = str(soup.get_text())
-                    print(newversionmessage + latestversionnumber + newversionmessage2 + fileversionnumber + newversionmessage3)
-                    
+                    print(
+                        newversionmessage + latestversionnumber + newversionmessage2 + fileversionnumber + newversionmessage3)
+
                     print(releasemessageinformation + "\n" + messagefornewrelease)
                 else:
-                    print(newversionmessage + latestversionnumber + newversionmessage2 + fileversionnumber + newversionmessage3)
+                    print(
+                        newversionmessage + latestversionnumber + newversionmessage2 + fileversionnumber + newversionmessage3)
             except:
-                print(newversionmessage + latestversionnumber + newversionmessage2 + fileversionnumber + newversionmessage3)
+                print(
+                    newversionmessage + latestversionnumber + newversionmessage2 + fileversionnumber + newversionmessage3)
     except Exception as e:
         print(lookingforupdateserror + " (" + str(e) + ").")
     print("\n")
@@ -1305,7 +1335,8 @@ try:
             speedtestconfig = speedtestdata.config
             ipadress = speedtestconfig.get("client").get("ip")
             isp = speedtestconfig.get("client").get("isp")
-            print(connectedtotestserversmessage + " IP Adress: " + str(ipadress) + "." + " ISP (Internet Service Provider): " + str(isp) + ".")
+            print(connectedtotestserversmessage + " IP Adress: " + str(
+                ipadress) + "." + " ISP (Internet Service Provider): " + str(isp) + ".")
             for speedtestindex in range(repeat):
                 try:
 
@@ -1897,7 +1928,9 @@ except Exception as e:
     button = Button(errorwindow, text="Report a bug", command=reportabug, compound="center")
 
     button.pack()
-    smalldescription = Label(errorwindow, text="When submitting a bug report, please make sure to paste this exception: " + "\"" + str(e) + "\"" + "\n This information is in English to make sure that \n it can display at almost all times an error is discovered.")
+    smalldescription = Label(errorwindow,
+                             text="When submitting a bug report, please make sure to paste this exception: " + "\"" + str(
+                                 e) + "\"" + "\n This information is in English to make sure that \n it can display at almost all times an error is discovered.")
     smalldescription.configure(font=font_mini)
     smalldescription.pack()
     errorwindow.mainloop()
