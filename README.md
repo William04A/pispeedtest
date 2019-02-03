@@ -3,6 +3,9 @@
 A really easy way to run multiple automated speedtest on your computer using Speedtest.net. Powered by [speedtest-cli](https://github.com/sivel/speedtest-cli).
 
 _____________
+
+**Hey! Look [here](https://github.com/William04A/pispeedtest/wiki/2019-heads-up) for a 2019-heads-up about what is planned for PiSpeedtest.**
+
 ### Features:
 **Here are some of PiSpeedtest´s features:**
 
