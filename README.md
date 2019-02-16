@@ -36,6 +36,11 @@ ________
 ### Changelog/Updates:
 **Application updates:**
 
+**V5.0.2:**
+
+This PiSpeedtest release fixes one mistake where waiting between speedtests was completeky broken in the "COMPATIBLE" mode.
+PiSpeedtest 5.5 is coming soon (release number unconfirmed) with many improvements and new features!
+
 **V5.0.1:**
 
 This PiSpeedtest release fixes some bugs found in PiSpeedtest 5.0 and also some earlier versions:
