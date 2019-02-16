@@ -55,7 +55,7 @@ try:
     smallestkbitsdown = 1000
     largestkbitsdown = 0
     noconnection = 0
-    fileversionnumber = "5.01"
+    fileversionnumber = "5.02"
     allowedmodes = ["BETA MODE", "STABLE", "COMPATIBLE"]
     loadconfig = [0, 0, 0, 0, 0]
 
@@ -1676,7 +1676,7 @@ try:
                     print(startingspeedtestmessage)
                     processpeedtest(0, filename=filedirectory, textlayout=configuredtextlayout, serverid=server)
                     print(speedtestcompletedmessage)
-                    time.sleep(0.5)
+                    time.sleep(wait)
                 except speedtest.NoMatchedServers:
                     print(serverunavailablemessage)
 
