@@ -1,6 +1,13 @@
+
 # π-speedtest
+
+[![Requirements Status](https://requires.io/github/William04A/pispeedtest/requirements.svg?branch=master)](https://requires.io/github/William04A/pispeedtest/requirements/?branch=master)
+![enter image description here](https://img.shields.io/badge/version-5.0.2-yellowgreen.svg)
+![Repo size
+](https://img.shields.io/github/repo-size/william04a/pispeedtest.svg)
+![Last commit](https://img.shields.io/github/last-commit/william04a/pispeedtest.svg)
 -----
-A really easy way to run multiple automated speedtest on your computer using Speedtest.net. Powered by [speedtest-cli](https://github.com/sivel/speedtest-cli).
+A really easy way to run multiple automated speedtest on your computer using Speedtest.net. Built with [Python](https://python.org/) and powered by [speedtest-cli](https://github.com/sivel/speedtest-cli).
 
 _____________
 
@@ -175,6 +182,14 @@ If you want guides and more information about PiSpeedtest, please check the [Wik
 Starting from PiSpeedtest 5.0, application updates will be documented at the [Projects](https://github.com/William04A/pispeedtest/Projects) page.
 Issues can be found on the [Issues](https://github.com/William04A/pispeedtest/Issues) page. If I, the PiSpeedtest main developer, finds any errors and/or exceptions, I will open an issue there and then update its progress. And everyone are free to open Issues and contribute to PiSpeedtest in any way, of course.
 _________
+### Application status:
+PiSpeedtest is powered by two main servers at the moment: an update information server (hosted on [000webhost](https://000webhost.com/) and a server for cloud saving PiSpeedtest speedtest results hosted by [PythonAnywhere](https://pythonanywhere.com/) with the server and its basic functions (such as URLs) built using the Python micro web framework called [Flask](http://flask.pocoo.org/).
+The uptime of both servers can be found here:
+**Update-checking-server status:** ![Update-checking-server status
+](https://img.shields.io/website-up-down-green-red/https/pispeedtestfiles.000webhostapp.com/.svg)
+**Cloudsaving server status:** 
+![Cloudsaving server uptime](https://img.shields.io/website-up-down-green-red/https/pispeedtestcloudsaving.pythonanywhere.com.svg)
+
 ### Accuracy information:
  As with almost every speedtesting software, 100% accurate results cannot be guaranteed. Most results are rounded to the closest number without decimals. For more information, you can read the "Inconsistency" information [here](https://github.com/sivel/speedtest-cli). With that said, PiSpeedtest is really reliable and the results that you get will be pretty accurate. The application is trustworthy to use for speedtesting.
 ________
