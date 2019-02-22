@@ -185,8 +185,12 @@ _________
 ### Application status:
 PiSpeedtest is powered by two main servers at the moment: an update information server (hosted on [000webhost](https://000webhost.com/) and a server for cloud saving PiSpeedtest speedtest results hosted by [PythonAnywhere](https://pythonanywhere.com/) with the server and its basic functions (such as URLs) built using the Python micro web framework called [Flask](http://flask.pocoo.org/).
 The uptime of both servers can be found here:
+
+
 **Update-checking-server status:** ![Update-checking-server status
 ](https://img.shields.io/website-up-down-green-red/https/pispeedtestfiles.000webhostapp.com/.svg)
+
+
 **Cloudsaving server status:** 
 ![Cloudsaving server uptime](https://img.shields.io/website-up-down-green-red/https/pispeedtestcloudsaving.pythonanywhere.com.svg)
 
