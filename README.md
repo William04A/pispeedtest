@@ -127,6 +127,7 @@ makes PiSpeedtest even more customzieable and easy to use.
 - More improvements, additions and fixes.
 
 **V2.0.1**
+
 - Fixed a critical file naming bug: an update is required to make PiSpeedtest work properly.
 
 **V2.0:**
@@ -137,7 +138,7 @@ makes PiSpeedtest even more customzieable and easy to use.
  - The program now checks for updates for PiSpeedtest from a server online.
  - You can now choose to enter the duration of the program in minutes or seconds.
  - Most of the beta features are in the stable release.
- - Configuration files are now stored in the direcctory "configurationfiles" and a more customizeable "config.txt" file is available.
+ - Configuration files are now stored in the directory "configurationfiles" and a more customizeable "config.txt" file is available.
  - Improved error handling and messaging, which will be updated even more in the future.
  - Newlines (\n, also known as the thing that happens when you press the "Enter" key on your keyboard), have been added to make the text and messages in PiSpeedtest easier to read.
  
