@@ -43,10 +43,24 @@ ________
 ### Changelog/Updates:
 **Application updates:**
 
+**V5.5: (releasing soon)**
+
+This PiSpeedtest release focuses both on stability improvements and other new features. This is what´s new:
+
+- PiSpeedtest´s configuration files now both supports JSON and .txt as file formats. Documentation is coming soon, but this is pretty self explainatory!
+
+- It is now much more clear which options that was applied, skipped or failed to be verified when loading data from the PiSpeedtest configuration file.
+
+- Fixed some spelling mistakes and bugs.
+
+- PiSpeedtest has introduced even better error handling ny using [faulthandler](https://docs.python.org/3/library/faulthandler.html) to dump tracebacks to log files.
+
+**Please note: PiSpeedtest V5.5 will be relased soon.**
+
 **V5.0.2:**
 
 This PiSpeedtest release fixes one mistake where waiting between speedtests was completeky broken in the "COMPATIBLE" mode.
-PiSpeedtest 5.5 is coming soon (release number unconfirmed) with many improvements and new features!
+PiSpeedtest 5.5 is coming soon with many improvements and new features!
 
 **V5.0.1:**
 
