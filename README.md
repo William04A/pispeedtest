@@ -2,7 +2,7 @@
 # π-speedtest
 
 [![Requirements Status](https://requires.io/github/William04A/pispeedtest/requirements.svg?branch=master)](https://requires.io/github/William04A/pispeedtest/requirements/?branch=master)
-![enter image description here](https://img.shields.io/badge/version-5.0.2-yellowgreen.svg)
+![enter image description here](https://img.shields.io/badge/version-5.5-yellowgreen.svg)
 ![Repo size
 ](https://img.shields.io/github/repo-size/william04a/pispeedtest.svg)
 ![Last commit](https://img.shields.io/github/last-commit/william04a/pispeedtest.svg)
@@ -43,7 +43,7 @@ ________
 ### Changelog/Updates:
 **Application updates:**
 
-**V5.5: (releasing soon)**
+**V5.5:**
 
 This PiSpeedtest release focuses both on stability improvements and other new features. This is what´s new:
 
@@ -55,7 +55,6 @@ This PiSpeedtest release focuses both on stability improvements and other new fe
 
 - PiSpeedtest has introduced even better error handling ny using [faulthandler](https://docs.python.org/3/library/faulthandler.html) to dump tracebacks to log files.
 
-**Please note: PiSpeedtest V5.5 will be relased soon.**
 
 **V5.0.2:**
 
