@@ -17,8 +17,9 @@ try:
 
     import datetime
     import multiprocessing
+    import faulthandler
 
-
+    import json
     # Defining errors - These are not implemented that much yet.
 
     def __main__():
@@ -45,6 +46,8 @@ try:
     class UpdatecheckServerError(NoInternetConnection):
         pass
 
+    class WaitError(PiSpeedtestErrors):
+        pass
 
     downloadlist = []
     uploadlist = []
@@ -55,7 +58,7 @@ try:
     smallestkbitsdown = 1000
     largestkbitsdown = 0
     noconnection = 0
-    fileversionnumber = "5.02"
+    fileversionnumber = "5.5"
     allowedmodes = ["BETA MODE", "STABLE", "COMPATIBLE"]
     loadconfig = [0, 0, 0, 0, 0]
 
@@ -63,7 +66,7 @@ try:
 
     fontfilename = "Roboto-Bold.ttf"  # Add a custom font filename here if you want a custom font for the images. Don´t forget the file extension! Only .ttf-files supported.
     print("PiSpeedtest " + fileversionnumber + ".")
-
+    logfilename = open(os.path.join(os.getcwd() + "/errorlog.txt"), "a+")
     # Language settings:
     approved_languages = ["sv-se", "en-us"]  # To add a language that´s not in the list, make sure to add its name here.
     languageconfigpath = os.path.join(os.getcwd() + "/configurationfiles/languageconfiguration.txt")
@@ -104,7 +107,7 @@ try:
         programdurationseconds = "Hur länge vill du köra programmet (i sekunder)? 12 timmar = 43 200 sekunder: "
 
         programdurationminutes = "Hur länge vill du köra programmet (i minuter)? 12 timmar = 720 minuter: "
-        howofteninput = "Hur ofta vill du köra programmet (i sekunder) tar cirka "
+        howofteninput = "Hur ofta vill du köra programmet (i sekunder)? Ett speedtest tar cirka "
         seconds = " sekunder. "
         speedtestfilenameinput = "Vilket namn vill du ha på speedtestfilen? Använd inte punkter eller .txt, det läggs till automatiskt. "
         errormessage = "Ett fel inträffade när ett speedtest skulle köras."
@@ -128,7 +131,7 @@ try:
         configuredruneverysecondmessage = "Konfiguerad \"kör var ___ sekund\": "
         runeverysecondinvalid = "\"Kör var ___ sekund\"-konfigurationen är felaktig."
         invalidmodeselected = "Du valde inte ett giltigt program-läge. Vänligen starta om PiSpeedtest."
-        waiterror = "Ett fel inträffad när speedtest-tider skulle beräknas. \"Kör programmet var ___ - sekund måste vara större än: "
+        waiterror = "Ett fel inträffade när speedtest-tider skulle beräknas. \"Kör programmet var ___ - sekund måste vara större än: "
         betaversionmessage = "Det verkar som att du använder en betaversion av PiSpeedtest "
         maybenotstable = "Betaversioner kan innehålla buggar och vara ostadiga."
         erroroccurred = "Ett fel inträffade när PiSpeedtest kördes. Fel: "
@@ -217,6 +220,17 @@ try:
         networkgatewayipadressmesage = "Nätverks-gateway/routers IP-adress: "
         pingingnetworkmessage = "Pingar nätverk..."
         cloudserverresponsemessage = "Svar från molnlagringsservern: "
+        viewresultslinkmessage = "Se dina speedtest-resultat här: "
+        configurationjsonfileloadingerrormessage = "Tyvärr inträffade ett fel när filen \"configuration.json\" skulle laddas."
+        loadingoldconfigurationmessage = "INFORMATION: Laddar gammal konfigurationfil i .txt-format..."
+        configurationfilesuccessfullyloadedandappliedmessage = "Konfigurationsfilen har laddats! Status: "
+        successfullyloadedandappliedmessage = "Lyckades ladda och applicera "
+        optionsmessage = " inställningar"
+        successfullyskipedmessage = "Lyckades skippa "
+        optionswontbeappliedmessage = " alternativ. Dessa kommer inte att appliceras i PiSpeedtest."
+        unfortunatelymessage = "Tyvärr så inträffade "
+        configurationfileerrorsoccurredmessage = " fel. Vänligen se till att alla val i filerna \"config.txt\" or \"config.json\" är gilltiga. Felaktigt formatterade val kommer ej att appliceras i PiSpeedtest. Programmet kommer att fortsätta köras som vanligt."
+        configurationfile_noerrorsoccurredmessage = "Inga fel inträffade när filen \"config.txt\" eller \"config.json\" laddades."
     elif languageconfiguration == "en-us":
         pretestresults = "Pre-test-result: Ping to https://www.google.com. Result: "
         pretestresults2 = " seconds."
@@ -362,7 +376,16 @@ try:
         startingpretestmessage = "Starting pre-test."
         networkgatewayipadressmesage = "Network gateway IP adress: "
         pingingnetworkmessage = "Pinging network..."
-
+        configurationjsonfileloadingerrormessage = "Unfortunately, there was an error when loading the \"configuration.json\" file."
+        loadingoldconfigurationmessage = "INFORMATION: Loading old configuration file in .txt-format..."
+        configurationfilesuccessfullyloadedandappliedmessage = "Success! The configuration file has been loaded. Status:"
+        successfullyloadedandappliedmessage = "Successfully loaded and applied "
+        optionsmessage = " options"
+        successfullyskipedmessage = "Successfully skiped "
+        optionswontbeappliedmessage = " options. Those won´t be applied to PiSpeedtest."
+        unfortunatelymessage = "Unfortunately, "
+        configurationfileerrorsoccurredmessage = " errors occurred. Please make sure that all options entered in the \"config.txt\" or \"config.json\" file are valid. Incorrectly formatted options will not be applied to PiSpeedtest. The program will continue to run normally."
+        configurationfile_noerrorsoccurredmessage = "No errors occurred while loading the \"config.txt\" or \"config.json\" file."
     else:
         pretestresults = "The current language configuration is somehow invalid."
         pretestresults2 = "The current language configuration is somehow invalid."
@@ -496,6 +519,16 @@ try:
         startingpretestmessage = "The current language configiuration is somehow invalid."
         networkgatewayipadressmesage = "The current language configuration is somehow invalid."
         pingingnetworkmessage = "The current language configuration is somehow invalid."
+        configurationjsonfileloadingerrormessage = "The current language configuration is somehow invalid."
+        loadingoldconfigurationmessage = "The current language configuration is somehow invalid."
+        configurationfilesuccessfullyloadedandappliedmessage = "The current language configuration is somehow invalid."
+        successfullyloadedandappliedmessage = "The current language configuration is somehow invalid."
+        optionsmessage = "The current language configuration is somehow invalid."
+        successfullyskipedmessage = "The current language configuration is somehow invalid."
+        optionswontbeappliedmessage = "The current language configuration is somehow invalid."
+        unfortunatelymessage = "The current language configuration is somehow invalid."
+        configurationfileerrorsoccurredmessage = "The current langauge configuration is somehow invalid."
+        configurationfile_noerrorsoccurredmessage = "The current langauge configuration is somehow invalid."
         # Main speedtest code:
 
 
@@ -740,11 +773,10 @@ try:
         if latestversionnumber == fileversionnumber:
             print(youhavethelatestversionmessage)
         elif float(latestversionnumber) < float(fileversionnumber):
-            print(betaversionmessage + "( " + fileversionnumber + ") . " + maybenotstable)
+            print(betaversionmessage + "(" + fileversionnumber + "). " + maybenotstable)
         else:
             releasemessage = requests.get("https://pispeedtestfiles.000webhostapp.com/releasemessage.html")
-            releasemessageversion = requests.get(
-                "https://pispeedtestfiles.000webhostapp.com/releasemessageversion.html")
+            releasemessageversion = requests.get("https://pispeedtestfiles.000webhostapp.com/releasemessageversion.html")
             soup = BeautifulSoup(releasemessageversion.text, "html.parser")
             releasemessageversionnumber = str(soup.get_text()).replace("\n", "")
             try:
@@ -780,12 +812,14 @@ try:
         else:
 
             print(skipingcloudsavingsetupmessage)
-
+    else:
+        print("ALERT: Could not read clousaving status! Please check the file \"cloudsavingstatus.txt\"")
     with open(os.path.join(os.getcwd() + "\\data\\programopenedtimes.txt"), "r+") as programopenedtimesfile:
         filecontents = programopenedtimesfile.read().splitlines()
         programopenedtimesdata = int(filecontents[0])
         programopenedtimes = programopenedtimesdata + 1
         programopenedtimes_str = str(programopenedtimes)
+        programopenedtimesfile.truncate()
         programopenedtimesfile.write(programopenedtimes_str + "\n")
 
     print("\n")
@@ -800,10 +834,10 @@ try:
 
     # Message when a speedtest accuracy mode is found:
     def speedtestaccuracymodefound():
-        print(speedtestaccuracymode + speedtestaccuracymodefoundmessage)
+        print(speedtestaccuracymode.upper() + speedtestaccuracymodefoundmessage)
 
 
-    if speedtestaccuracymode == "NORMAL" or speedtestaccuracymode.lower() == "normal":
+    if speedtestaccuracymode.lower() == "normal":
         speedtestaccuracymodefound()
         timeone = time.time()
         if noconnection == 0:
@@ -814,7 +848,7 @@ try:
         elif noconnection == 1:
             print(nointernetconnectionmessage)
 
-    elif speedtestaccuracymode == "ACCURATE" or speedtestaccuracymode.lower() == "accurate":
+    elif speedtestaccuracymode.lower() == "accurate":
         timelist = []
         speedtestaccuracymodefound()
         if noconnection == 0:
@@ -826,7 +860,7 @@ try:
             speedtesttime = round(eval("+".join(timelist)))
         elif noconnection == 1:
             print(nointernetconnectionmessage)
-    elif speedtestaccuracymode == "FAST" or speedtestaccuracymode.lower() == "fast":
+    elif speedtestaccuracymode.lower() == "fast":
         timelist3 = []
         speedtestaccuracymodefound()
         if noconnection == 0:
@@ -835,7 +869,7 @@ try:
             speedtesttime = str(round((time.time() - timeone1) * 2))
             print(speedtestran + str(round(int(speedtesttime) / 2)) + speedtestseconds + " " + fastspeedtest)
 
-    elif speedtestaccuracymode == "SUPERB" or speedtestaccuracymode.lower() == "superb":
+    elif speedtestaccuracymode.lower() == "superb":
         timelist2 = []
         speedtestaccuracymodefound()
         if noconnection == 0:
@@ -852,56 +886,129 @@ try:
             print(nointernetconnectionmessage)
     else:
         print(mode_error)
-
-        exit()
+        raise NoModeDefinded
     print("\n")
+    def load_configurationfile_from_txt():
+        configurationfile_loadedsuccessfully = 0
+        configurationfile_skips = 0
+        configurationfile_errors = 0
+        try:
+            configurationfile = os.path.join(os.getcwd() + "/configurationfiles/config.txt")
 
-    try:
-        configurationfile = os.path.join(os.getcwd() + "/configurationfiles/config.txt")
+            with open(configurationfile, "r+") as configurationsfile:
+                print(loadingconfigurationmessage)
+                configurationfilecontent = configurationsfile.read().splitlines()
+                if configurationfilecontent[9] in allowedmodes:
+                    configuredmode = configurationfilecontent[9]
+                    print(configuredmodemessage + configuredmode + ".")
+                    loadconfig[0] = 1
+                    configurationfile_loadedsuccessfully += 1
+                elif configurationfilecontent[9] == "-SKIP-":
+                    print(skipdetected)
+                    loadconfig[0] = 0
+                    configurationfile_skips += 1
+                else:
+                    print(invalidmode)
 
-        with open(configurationfile, "r+") as configurationsfile:
+                    loadconfig[0] = 0
+                    configurationfile_errors += 1
+                try:
+                    configuredspeedtestduration1 = int(configurationfilecontent[10])
+                    configuredspeedtestduration = int(configuredspeedtestduration1 * 60)
+                    print(configuredspeedtestdurationmessage + str(configuredspeedtestduration / 60) + minutes)
+                    loadconfig[1] = 1
+                    configurationfile_loadedsuccessfully += 1
+                except:
+                    if configurationfilecontent[10] == "-SKIP-":
+                        print(skipdetected)
+                        loadconfig[1] = 0
+                        configurationfile_skips += 1
+                    else:
+                        print(invalidduration)
+                        loadconfig[1] = 0
+                        configurationfile_errors += 1
+                try:
+                    configuredruneverysecond = int(configurationfilecontent[11])
+                    print(configuredruneverysecondmessage + str(configuredruneverysecond) + seconds)
+                    loadconfig[2] = 1
+                    configurationfile_loadedsuccessfully += 1
+                except:
+                    if configurationfilecontent[11] == "-SKIP-":
+                        print(skipdetected)
+                        loadconfig[2] = 0
+                        configurationfile_skips += 1
+                    else:
+                        print(runeverysecondinvalid)
+                        loadconfig[2] = 0
+                        configurationfile_errors +=1
+            print("\n")
+        except:
+            print(speedtestconfignotfound + " (\"config.txt\")")
+            loadconfig[0] = 0
+            loadconfig[1] = 0
+            loadconfig[2] = 0
+    if os.path.exists(os.getcwd() + "/configurationfiles/config.json") == True:
+        with open(os.getcwd() + "/configurationfiles/config.json", "r") as configurationjsonfile:
             print(loadingconfigurationmessage)
-            configurationfilecontent = configurationsfile.read().splitlines()
-            if configurationfilecontent[9] in allowedmodes:
-                configuredmode = configurationfilecontent[9]
-                print(configuredmodemessage + configuredmode + ".")
-                loadconfig[0] = 1
-            elif configurationfilecontent[9] == "-SKIP-":
-                print(skipdetected)
+            try:
+                configurationfilecontent = json.loads("".join(configurationjsonfile.read().splitlines()))
+            except json.JSONDecodeError:
+                print(configurationjsonfileloadingerrormessage)
+        if configurationfilecontent.get("loadoldconfigurationfile").upper() == "True":
+            load_configurationfile_from_txt()
+        else:
+            configurationfile_loadedsuccessfully = 0
+            configurationfile_skips = 0
+            configurationfile_errors = 0
+            configuredmode = configurationfilecontent.get("mode")
+            configuredspeedtestduration = configurationfilecontent.get("speedtestduration_minutes")
+            configuredruneverysecond = configurationfilecontent.get("waitbetweenspeedtests_seconds")
+            if configuredmode.upper() not in allowedmodes or configuredmode.upper() == "SKIP":
                 loadconfig[0] = 0
+                if configuredmode.upper() == "-SKIP-":
+                    configurationfile_skips += 1
+                elif configuredmode.upper() not in allowedmodes:
+                    configurationfile_errors += 1
             else:
-                print(invalidmode)
-
-                loadconfig[0] = 0
-            try:
-                configuredspeedtestduration1 = int(configurationfilecontent[10])
-                configuredspeedtestduration = int(configuredspeedtestduration1 * 60)
-                print(configuredspeedtestdurationmessage + str(configuredspeedtestduration / 60) + minutes)
-                loadconfig[1] = 1
-            except:
-                if configurationfilecontent[10] == "-SKIP-":
-                    print(skipdetected)
+                loadconfig[0] = 1
+                configurationfile_loadedsuccessfully += 1
+            if str(configuredspeedtestduration).upper() == "-SKIP-":
+                loadconfig[1] = 0
+                configurationfile_skips += 1
+            else:
+                try:
+                    int(configuredspeedtestduration)
+                    loadconfig[1] = 1
+                    configurationfile_loadedsuccessfully += 1
+                except ValueError:
                     loadconfig[1] = 0
-                else:
-                    print(invalidduration)
-                    loadconfig[1] = 0
-            try:
-                configuredruneverysecond = int(configurationfilecontent[11])
-                print(configuredruneverysecondmessage + str(configuredruneverysecond) + seconds)
-                loadconfig[2] = 1
-            except:
-                if configurationfilecontent[11] == "-SKIP-":
-                    print(skipdetected)
+                    configurationfile_errors += 1
+            if str(configuredruneverysecond).upper() == "-SKIP-":
+                loadconfig[2] = 0
+                configurationfile_skips += 1
+            else:
+                try:
+                    int(configuredruneverysecond)
+                    configurationfile_loadedsuccessfully += 1
+                    loadconfig[2] = 1
+                    configurationfile_loadedsuccessfully += 1
+                except ValueError:
                     loadconfig[2] = 0
-                else:
-                    print(runeverysecondinvalid)
-                    loadconfig[2] = 0
-        print("\n")
-    except:
-        print(speedtestconfignotfound)
-        loadconfig[0] = 0
-        loadconfig[1] = 0
-        loadconfig[2] = 0
+                    configurationfile_errors += 1
+    elif os.path.exists(os.getcwd() + "/configurationfiles/config.txt") == True:
+        print(loadingoldconfigurationmessage)
+        load_configurationfile_from_txt()
+    else:
+        print(speedtestconfignotfound + "(\"config.json\")")
+    print("--------------------------------------------------------")
+    print(configurationfilesuccessfullyloadedandappliedmessage)
+    print(successfullyloadedandappliedmessage + str(configurationfile_loadedsuccessfully) + optionsmessage)
+    print(successfullyskipedmessage + str(configurationfile_skips) + optionswontbeappliedmessage)
+    if configurationfile_errors > 0:
+        print(unfortunatelymessage + str(configurationfile_errors) + configurationfileerrorsoccurredmessage)
+    else:
+        print(configurationfile_noerrorsoccurredmessage)
+    print("--------------------------------------------------------")
     if loadconfig[0] == 0:
         print("\n")
         print(programmodes)
@@ -979,7 +1086,7 @@ try:
         if wait < 1:
             print(waiterror + str(speedtesttime) + seconds + currentvaluemessage + str(wait))
 
-            exit()
+            raise WaitError
         else:
             repeat = round(times / (wait))
         print(str(repeat) + speedtestswillberunmessage)
@@ -1307,7 +1414,7 @@ try:
         if wait < 1:
             print(waiterror + str(speedtesttime) + seconds + currentvaluemessage + str(wait))
 
-            exit()
+            raise WaitError
         else:
             repeat = round(times / (wait))
         print(str(repeat) + speedtestswillberunmessage)
@@ -1509,7 +1616,7 @@ try:
                             speedtestreportfile.write("Generated at " + str(time.ctime()) + "." + "\n")
 
                             speedtestreportfile.write(
-                                "AVERAGE DOWNLOAD SPEED: " + str(averagedownload) + " mbit/s" + "\n")
+                                "AVERAGE DOWNLOAD SPEED: " + str(averagedownload) + " mbit/s " + "\n")
                             speedtestreportfile.write("AVERAGE UPLOAD SPEED: " + str(averageupload) + " mbit/s" + "\n")
                             speedtestreportfile.write(
                                 "AVERAGE PING SPEED: " + str(averageping) + " milliseconds" + "\n")
@@ -1893,57 +2000,53 @@ try:
     else:
         print(invalidmodeselected)
         raise NoModeDefinded("\"" + mode + "\"" + " is not a valid mode.")
-
 except Exception as e:
-    print(erroroccurred + " (" + str(e) + ").")
+    faulthandler.dump_traceback(logfilename)
     saveexceptioninfo(e, "PiSpeedtest")
+    if type(e) == WaitError or type(e) == NoModeDefinded or type(e) == NoInternetConnection:
+        "" #Skip printing exception info: error is displayed above.
+    else:
 
-    import webbrowser
+        import webbrowser
 
-    import os
+        import os
 
-    errorwindow = Tk()
-    font_small = Font(family="Arial", size="8")
-    font_medium = Font(family="Arial", size="10")
-    font_mini = Font(family="Arial", size="6")
-    font_big = Font(family="Arial", size="20")
-
-
-    def reportabug():
-        webbrowser.open("https://github.com/William04A/pispeedtest/issues/new")
+        errorwindow = Tk()
+        font_small = Font(family="Arial", size="8")
+        font_medium = Font(family="Arial", size="10")
+        font_mini = Font(family="Arial", size="6")
+        font_big = Font(family="Arial", size="20")
 
 
-    errorwindow.geometry("500x270")
-    errorwindow.title("PiSpeedtest - An error has occured.")
+        def reportabug():
+            webbrowser.open("https://github.com/William04A/pispeedtest/issues/new")
 
-    imagefile = PhotoImage(file=os.path.join(os.getcwd() + "\\" + "images\\popup_images" + "\\Speedtest_erroricon.png"))
-    image = Label(errorwindow, image=imagefile)
-    image.pack()
-    titletext = Label(errorwindow, text="An error has occured.")
 
-    titletext.configure(font=font_big)
+        errorwindow.geometry("500x270")
+        errorwindow.title("PiSpeedtest - An error has occured.")
 
-    titletext.pack()
-    description = Label(errorwindow,
-                        text="Unfortunately, an error occured in PiSpeedtest. Try to restart the program and see if" + "\n" + "the problem gets resolved. If not, please tap \"report a bug\" below.")
-    description.configure(font=font_medium)
+        imagefile = PhotoImage(file=os.path.join(os.getcwd() + "\\" + "images\\popup_images" + "\\Speedtest_erroricon.png"))
+        image = Label(errorwindow, image=imagefile)
+        image.pack()
+        titletext = Label(errorwindow, text="An error has occured.")
 
-    description.pack()
-    button = Button(errorwindow, text="Report a bug", command=reportabug, compound="center")
+        titletext.configure(font=font_big)
 
-    button.pack()
-    smalldescription = Label(errorwindow,
-                             text="When submitting a bug report, please make sure to paste this exception: " + "\"" + str(
-                                 e) + "\"" + "\n This information is in English to make sure that \n it can display at almost all times an error is discovered.")
-    smalldescription.configure(font=font_mini)
-    smalldescription.pack()
-    errorwindow.mainloop()
-    saveexceptioninfo(e, "Main program")
+        titletext.pack()
+        description = Label(errorwindow,
+                            text="Unfortunately, an error occured in PiSpeedtest. Try to restart the program and see if" + "\n" + "the problem gets resolved. If not, please tap \"report a bug\" below.")
+        description.configure(font=font_medium)
+
+        description.pack()
+        button = Button(errorwindow, text="Report a bug", command=reportabug, compound="center")
+
+        button.pack()
+        smalldescription = Label(errorwindow, text="When submitting a bug report, please make sure to paste the appropriate exception found in the file \"errorlog.txt\". \n This information is in English to make sure that \n it can display at almost all times an error is discovered.")
+        smalldescription.configure(font=font_mini)
+        smalldescription.pack()
+        errorwindow.mainloop()
+        saveexceptioninfo(e, "Main program")
 finally:
     print("\n")
     if cronjob == False:
-        try:
-            input(pressenterkeymessage)
-
-        except ValueError:
-            exit()
+        input(pressenterkeymessage)
