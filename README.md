@@ -11,7 +11,7 @@ A really easy way to run multiple automated speedtest on your computer using Spe
 
 _____________
 
-**Hey! Look [here](https://github.com/William04A/pispeedtest/wiki/2019-heads-up) for a 2019-heads-up about what is planned for PiSpeedtest.**
+**Hey there! Just to let you know, PiSpeedtest is still being actively maintained, but updates (especially the bigger ones) to the software might be rolled out with more delay.**
 
 ### Features:
 **Here are some of PiSpeedtest´s features:**
