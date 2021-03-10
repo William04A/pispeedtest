@@ -11,8 +11,14 @@ A really easy way to run multiple automated speedtest on your computer using Spe
 
 _____________
 
-**Hey there! Just to let you know, PiSpeedtest is still being actively maintained as in I can go in and fix things if there is a demand for it. A few things are missing and I'm pretty sure some servers are down and so on. In 2020, I am planning a bigger rewrite which uses other services for version control and cloud saving along with code updates. Worth to mention is that I have grown so much in my coding compared to when I started to write PiSpeedtest. Version numbers are not accurate at all - I will switch over to Semver.
+**Hey there! Just to let you know, PiSpeedtest is still being actively maintained as in I can go in and fix things if there is a demand for it. A few things are missing and I'm pretty sure some servers are down and so on. I am planning a bigger rewrite which uses other services for version control and cloud saving along with code updates. Worth to mention is that I have grown so much in my coding compared to when I started to write PiSpeedtest. Version numbers are not accurate at all - I will switch over to Semver.
 With all that said - PiSpeedtest should still be usuable - and I am so excited for the rewrite!**
+
+And please note:
+
+**Super disclaimer**
+
+This was a project I made early before learning about proper versioning or code quality. I am writing this years later just to empahize that this repository is nostalgia! It shows the growth in my coding! I am aware that the code quality in this project is very bad. To see what my current quality looks like, check out my new acc sotpotatis on GitHub!
 
 ### Features:
 **Here are some of PiSpeedtest´s features:**
