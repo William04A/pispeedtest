@@ -5,9 +5,10 @@ try:
 
     import os
 
-    from tkinter import *
+    from tk import *
 
-    from tkinter.font import Font
+    # commented out as tkinter.font does not seem to work anymore, this is most likely legacy code
+    # from tkinter.font import Font
     from threading import Thread
     import random
     import subprocess
