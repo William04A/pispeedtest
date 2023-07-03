@@ -4,3 +4,4 @@ Pillow>=5.1.0
 requests>=2.2.0
 netifaces>=0.10.7
 ping3>=1.4.1
+tk>=0.1.0
